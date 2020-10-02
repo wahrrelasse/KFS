@@ -5,8 +5,11 @@ import com.google.inject.Injector;
 import com.google.inject.assistedinject.Assisted;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 
 /**
@@ -17,6 +20,12 @@ public class SceneManager {
     private final Stage primaryStage;
     private final Injector injector;
 
+    private String lastTitle;
+
+    private Scene mainScene;
+    private Scene currentScene = null;
+    private Scene lastScene = null;
+
     @Inject
     public SceneManager(Injector injected, @Assisted Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -25,7 +34,11 @@ public class SceneManager {
     }
 
     private void initMainView() {
-
+        if(mainScene == null) {
+            Parent rootPane = initPresenter(OpenViewPresenter.fxml);
+            mainScene = new Scene(rootPane, 800, 600);
+        }
+        showScene(mainScene, "KFS test");
     }
     /**
      * Subroutine creating parent panes from FXML files
@@ -52,4 +65,22 @@ public class SceneManager {
         }
         return rootPane;
     }
+
+    /**
+     * Showing specified Scene, while remembering previous one
+     * @param scene New scene to show
+     * @param title Title of that new scene
+     */
+    private void showScene(final Scene scene, final String title) {
+
+        this.lastScene = this.currentScene;
+        this.lastTitle = primaryStage.getTitle();
+        this.currentScene = scene;
+
+        primaryStage.setTitle(title);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+
 }

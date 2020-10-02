@@ -7,28 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="de.kfs.db.OpenViewPresenter">
     <MenuBar VBox.vgrow="NEVER">
-      <menus>
         <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Neu" />
-            <MenuItem mnemonicParsing="false" text="Öffne Räder" />
-            <MenuItem mnemonicParsing="false" text="Öffne E-Bikes" />
-          </items>
+            <MenuItem fx:id="openNew" mnemonicParsing="false" onAction="#onOpenNewPressed" text="Neu"/>
+            <MenuItem fx:id="openMenu" mnemonicParsing="false" onAction="#onOpenBikePressed" text="Öffne Räder"/>
+            <MenuItem fx:id="openEMenu" mnemonicParsing="false" onAction="#onOpenEBikesPressed" text="Öffne E-Bikes"/>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Anleitung" />
-               </items>
+            <MenuItem mnemonicParsing="false" text="Anleitung"/>
         </Menu>
-      </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <ImageView fitHeight="375.0" fitWidth="640.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
+        <children>
+            <ImageView fx:id="logoSpace" fitHeight="375.0" fitWidth="640.0" layoutY="-1.0" pickOnBounds="true"
+                       preserveRatio="true"/>
+        </children>
     </AnchorPane>
-  </children>
 </VBox>
