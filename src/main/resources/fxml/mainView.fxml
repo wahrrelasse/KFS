@@ -16,7 +16,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0"
       prefWidth="816.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="de.kfs.db.MainViewPresenter">
+      fx:controller="de.kfs.db.controller.MainViewPresenter">
    <TableView editable="true" prefHeight="200.0" prefWidth="200.0">
       <columns>
          <TableColumn prefWidth="75.0" text="Nummer"/>

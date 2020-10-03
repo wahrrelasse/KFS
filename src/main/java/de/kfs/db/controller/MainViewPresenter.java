@@ -1,4 +1,4 @@
-package de.kfs.db;
+package de.kfs.db.controller;
 
 import javafx.event.ActionEvent;
 
@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 
 public class MainViewPresenter {
 
+    public static String fxml = "/fxml/mainView.fxml";
 
     public void onSaveButtonPressed(ActionEvent actionEvent) {
     }

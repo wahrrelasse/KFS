@@ -3,13 +3,13 @@ package de.kfs.db;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.assistedinject.Assisted;
+import de.kfs.db.controller.MainViewPresenter;
+import de.kfs.db.controller.OpenViewPresenter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.net.URL;
 
 /**
@@ -22,6 +22,7 @@ public class SceneManager {
 
     private String lastTitle;
 
+    private Scene openScene;
     private Scene mainScene;
     private Scene currentScene = null;
     private Scene lastScene = null;
@@ -30,15 +31,25 @@ public class SceneManager {
     public SceneManager(Injector injected, @Assisted Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.injector = injected;
-        initMainView();
+        initViews();
     }
 
+    private void initViews() {
+        initMainView();
+        initOpenView();
+    }
+    private void initOpenView() {
+        if(openScene == null) {
+            Parent rootPane = initPresenter(OpenViewPresenter.fxml);
+            openScene = new Scene(rootPane, 800, 600);
+        }
+        showScene(openScene, "KFSDB IDEA v0.1");
+    }
     private void initMainView() {
         if(mainScene == null) {
-            Parent rootPane = initPresenter(OpenViewPresenter.fxml);
+            Parent rootPane = initPresenter(MainViewPresenter.fxml);
             mainScene = new Scene(rootPane, 800, 600);
         }
-        showScene(mainScene, "KFS test");
     }
     /**
      * Subroutine creating parent panes from FXML files

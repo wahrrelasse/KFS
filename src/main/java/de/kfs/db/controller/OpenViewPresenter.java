@@ -1,4 +1,4 @@
-package de.kfs.db;
+package de.kfs.db.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
