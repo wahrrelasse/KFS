@@ -44,8 +44,7 @@ public class SceneManager {
      * Subroutine creating parent panes from FXML files
      * <p>
      * This Method tries to create a parent pane from the FXML file specified by
-     * the URL String given to it. If the LOG-Level is set to Debug or higher loading
-     * is written to the LOG.
+     * the URL String given to it.
      * If it fails to load the view a RuntimeException is thrown.
      *
      * @param fxmlFile FXML file to load the view from
