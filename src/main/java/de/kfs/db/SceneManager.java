@@ -3,8 +3,7 @@ package de.kfs.db;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.assistedinject.Assisted;
-import de.kfs.db.controller.MainViewPresenter;
-import de.kfs.db.controller.OpenViewPresenter;
+import de.kfs.db.controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,8 +21,13 @@ public class SceneManager {
 
     private String lastTitle;
 
+
+    //Scene that may be switched between
     private Scene openScene;
     private Scene mainScene;
+    private Scene editScene;
+    private Scene deleteScene;
+    private Scene adavancedAddScene;
     private Scene currentScene = null;
     private Scene lastScene = null;
 
@@ -37,20 +41,44 @@ public class SceneManager {
     private void initViews() {
         initMainView();
         initOpenView();
+        initEditView();
+        initDeleteView();
+        initAdvancedAddView();
     }
+
     private void initOpenView() {
-        if(openScene == null) {
+        if (openScene == null) {
             Parent rootPane = initPresenter(OpenViewPresenter.fxml);
             openScene = new Scene(rootPane, 800, 600);
         }
-        showScene(openScene, "KFSDB IDEA v0.1");
     }
+
     private void initMainView() {
-        if(mainScene == null) {
+        if (mainScene == null) {
             Parent rootPane = initPresenter(MainViewPresenter.fxml);
             mainScene = new Scene(rootPane, 800, 600);
         }
     }
+
+    private void initEditView() {
+        if (editScene == null) {
+            Parent rootPane = initPresenter(EditViewPresenter.fxml);
+            editScene = new Scene(rootPane, 600, 290);
+        }
+    }
+    private void initDeleteView() {
+        if(deleteScene == null) {
+            Parent rootPane = initPresenter(DeleteViewPresenter.fxml);
+            deleteScene = new Scene(rootPane, 300, 200);
+        }
+    }
+    private void initAdvancedAddView() {
+        if(adavancedAddScene == null) {
+            Parent rootPane = initPresenter(AdvancedAddViewPresenter.fxml);
+            adavancedAddScene = new Scene(rootPane, 600, 272);
+        }
+    }
+
     /**
      * Subroutine creating parent panes from FXML files
      * <p>
@@ -78,6 +106,7 @@ public class SceneManager {
 
     /**
      * Showing specified Scene, while remembering previous one
+     *
      * @param scene New scene to show
      * @param title Title of that new scene
      */

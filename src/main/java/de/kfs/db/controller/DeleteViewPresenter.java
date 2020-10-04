@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 
 public class DeleteViewPresenter {
 
+    public static String fxml = "/fxml/deleteView.fxml";
     @FXML
     public int deleteNumberField;
 
