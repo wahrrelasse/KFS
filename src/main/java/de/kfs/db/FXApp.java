@@ -24,6 +24,8 @@ public class FXApp extends Application {
         SceneManagerFactory sceneManagerFactory = injector.getInstance(SceneManagerFactory.class);
         SceneManager sceneManager = sceneManagerFactory.create(stage);
 
+        //showing first Scene
+        sceneManager.showOpenScene();
 
 
 

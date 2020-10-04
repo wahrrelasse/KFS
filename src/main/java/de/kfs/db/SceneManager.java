@@ -7,6 +7,7 @@ import de.kfs.db.controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -17,6 +18,7 @@ import java.net.URL;
 public class SceneManager {
 
     private final Stage primaryStage;
+    private Stage secondaryStage;
     private final Injector injector;
 
     private String lastTitle;
@@ -27,7 +29,8 @@ public class SceneManager {
     private Scene mainScene;
     private Scene editScene;
     private Scene deleteScene;
-    private Scene adavancedAddScene;
+    private Scene advancedAddScene;
+
     private Scene currentScene = null;
     private Scene lastScene = null;
 
@@ -49,7 +52,7 @@ public class SceneManager {
     private void initOpenView() {
         if (openScene == null) {
             Parent rootPane = initPresenter(OpenViewPresenter.fxml);
-            openScene = new Scene(rootPane, 800, 600);
+            openScene = new Scene(rootPane, 600, 400);
         }
     }
 
@@ -73,9 +76,9 @@ public class SceneManager {
         }
     }
     private void initAdvancedAddView() {
-        if(adavancedAddScene == null) {
+        if(advancedAddScene == null) {
             Parent rootPane = initPresenter(AdvancedAddViewPresenter.fxml);
-            adavancedAddScene = new Scene(rootPane, 600, 272);
+            advancedAddScene = new Scene(rootPane, 600, 272);
         }
     }
 
@@ -119,6 +122,60 @@ public class SceneManager {
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    /**
+     * Shows specified Scene, while keeping the current one as parent and blocking all
+     * inputs that parent
+     * @param scene Scene to be shown as child of currently shown scene
+     * @param title title of that new Scene
+     */
+    private void showChildScene(final Scene scene, final String title) {
+
+        secondaryStage = new Stage();
+        secondaryStage.setScene(scene);
+        secondaryStage.setTitle(title);
+
+        secondaryStage.initOwner(primaryStage);
+        secondaryStage.initModality(Modality.APPLICATION_MODAL);
+        secondaryStage.show();
+
+
+    }
+
+    /**
+     * Shows the first Scene where files can be loaded
+     */
+    public void showOpenScene() {
+        showScene(openScene, "KFS v0.4");
+    }
+    /**
+     * Shows the main Scene with the TableView and its options
+     */
+    public void showMainScene() {
+        showScene(mainScene, "Alle Räder");
+    }
+
+    /**
+     * shows the deleteScene as a child of the current Scene
+     */
+    public void showDeleteScene() {
+        showChildScene(deleteScene, "Löschen...");
+
+    }
+
+    /**
+     * shows the editScene as a child of the currentScene
+     */
+    public void showEditScene() {
+        showChildScene(editScene, "Bearbeiten...");
+    }
+
+    /**
+     * shows the AdvancedAddScene as a child of the currentScene
+     */
+    public void showAdvancedAddScene() {
+        showChildScene(advancedAddScene, "E-Bike hinzufügen...");
     }
 
 
