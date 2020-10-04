@@ -2,11 +2,45 @@ package de.kfs.db.controller;
 
 import javafx.event.ActionEvent;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
 public class MainViewPresenter {
 
     public static String fxml = "/fxml/mainView.fxml";
+
+    @FXML
+    public Button saveButton;
+    @FXML
+    public Button editButton;
+    @FXML
+    public Button deleteButton;
+    @FXML
+    public CheckBox onlyECheck;
+    @FXML
+    public ChoiceBox searchChoice;
+    @FXML
+    public TableView table;
+    @FXML
+    public TextField searchField;
+    @FXML
+    public TextField internalField;
+    @FXML
+    public TextField frameField;
+    @FXML
+    public TextField colorField;
+    @FXML
+    public Button advancedButton;
+    @FXML
+    public Button addButton;
+    @FXML
+    public TextField extraField;
+    @FXML
+    public TextField keyField;
+    @FXML
+    public TextField brandField;
+
 
     /**
      * Opens up save Dialogue and saves Data from table
@@ -14,6 +48,7 @@ public class MainViewPresenter {
      */
 
     public void onSaveButtonPressed(ActionEvent actionEvent) {
+
     }
 
     /**
