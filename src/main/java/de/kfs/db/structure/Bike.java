@@ -14,16 +14,7 @@ public class Bike extends AbstractBike {
      */
     public void save(DataOutputStream out) throws IOException {
 
-        out.writeUTF(internalNumber);
-        out.writeUTF(frameNumber);
-        //Key
-        out.writeUTF(bikeKey.getFrameKey());
-        out.writeUTF(bikeKey.getBpKey());
-        //Information wrapper
-        out.writeUTF(additionalInfo.getManufacturer());
-        out.writeUTF(additionalInfo.getModelName());
-        out.writeInt(additionalInfo.getTireDiameter());
-        out.writeInt(additionalInfo.getFrameHeigth());
+        AbstractBike.save(out, this);
 
     }
 }

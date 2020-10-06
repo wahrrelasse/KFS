@@ -68,9 +68,12 @@ public abstract class AbstractBike {
 
             for (AbstractBike ab : bikes) {
                 if (ab instanceof Bike) {
-                    //TODO write some sort of identifier
+                    //Identifier: simple classname
+                    out.writeUTF(Bike.class.getSimpleName());
+
                     ((Bike) ab).save(out);
                 } else if (ab instanceof EBike) {
+                    out.writeUTF(EBike.class.getSimpleName());
 
                     ((EBike) ab).save(out);
                 }
@@ -85,5 +88,24 @@ public abstract class AbstractBike {
 
             e.printStackTrace();
         }
+    }
+
+    /**
+     * save the general information for all bikes (no duplication in Bike & E-Bike)
+     * @param out the outputstream to save to
+     * @param bike to be saved
+     * @throws IOException gets caught where out is created
+     */
+    public static void save(DataOutputStream out, AbstractBike bike) throws IOException {
+       out.writeUTF(bike.internalNumber);
+       out.writeUTF(bike.frameNumber);
+        //Key
+       out.writeUTF(bike.bikeKey.getFrameKey());
+       out.writeUTF(bike.bikeKey.getBpKey());
+       //InformationWrapper
+        out.writeUTF(bike.additionalInfo.getManufacturer());
+        out.writeUTF(bike.additionalInfo.getModelName());
+        out.writeInt(bike.additionalInfo.getTireDiameter());
+        out.writeInt(bike.additionalInfo.getFrameHeigth());
     }
 }
