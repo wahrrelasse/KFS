@@ -14,6 +14,13 @@ public class InformationWrapper {
     private int frameHeigth;
     private int tireDiameter;
 
+    public InformationWrapper(String manufacturer, String modelName, int frameHeigth, int tireDiameter) {
+        this.manufacturer = manufacturer;
+        this.modelName = modelName;
+        this.frameHeigth = frameHeigth;
+        this.tireDiameter = tireDiameter;
+    }
+
     public String getManufacturer() {
         return manufacturer;
     }

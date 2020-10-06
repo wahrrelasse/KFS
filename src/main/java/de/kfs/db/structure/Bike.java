@@ -8,6 +8,13 @@ import java.io.IOException;
 public class Bike extends AbstractBike {
 
 
+    private Bike (AbstractBike ab) {
+
+        this.internalNumber = ab.internalNumber;
+        this.frameNumber = ab.frameNumber;
+        this.bikeKey = ab.bikeKey;
+        this.additionalInfo = ab.additionalInfo;
+    }
     /**
      * save one bike using an already created output stream
      * @param out the OutputStream to write to
@@ -19,5 +26,16 @@ public class Bike extends AbstractBike {
 
     }
 
+    /**
+     *
+     * @param in the used inputstream
+     * @return new bike from the inputstream
+     * @throws IOException catched where in is created
+     */
+    public static Bike load(DataInputStream in) throws IOException {
+
+        //Casting here like return (Bike) AbstractBike.load(in); probably doesn't work
+       return new Bike(AbstractBike.load(in));
+    }
 
 }

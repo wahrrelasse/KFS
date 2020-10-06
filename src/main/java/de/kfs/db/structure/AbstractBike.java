@@ -18,6 +18,19 @@ public abstract class AbstractBike {
     protected BikeKey bikeKey;
     protected InformationWrapper additionalInfo;
 
+    /**
+     * default constructor
+     */
+    public AbstractBike() {
+
+    }
+    private AbstractBike (String internalNumber, String frameNumber, BikeKey bk, InformationWrapper info) {
+        this.internalNumber = internalNumber;
+        this.frameNumber = frameNumber;
+        this.bikeKey = bk;
+        this.additionalInfo = info;
+    }
+
     public BikeKey getBikeKey() {
         return bikeKey;
     }
@@ -120,6 +133,64 @@ public abstract class AbstractBike {
 
 
         }
+
+    /**
+     * @param file the file to load from
+     * @return all Bike & EBikes of that file
+     */
+    public static List<AbstractBike> load(File file) {
+
+        AbstractBike[] bikes = null;
+        try(DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(file.getPath())))) {
+
+            //empty file / no list in it --> preventing IOException from being thrown
+            if(in.available() < 4) {
+                return new ArrayList<>();
+            }
+            bikes = new AbstractBike[in.readInt()];
+            for(int i = 0; i < bikes.length; i++) {
+                String next = in.readUTF();
+                if(next.equals(Bike.class.getSimpleName())) {
+                    bikes[i] = Bike.load(in);
+                } else if (next.equals(EBike.class.getSimpleName())) {
+                    bikes[i] = EBike.load(in);
+                }
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //If for some reason its null
+        if(bikes == null) {
+            bikes = new AbstractBike[0];
+        }
+        return Arrays.asList(bikes);
+
+    }
+
+    /**
+     *
+     * @param in the inputstream
+     * @return abstract bike to be used further
+     * @throws IOException will be caught where in is created
+     */
+    public static AbstractBike load(DataInputStream in) throws IOException {
+
+        BikeKey bk = new BikeKey(in.readUTF(), in.readUTF());
+        InformationWrapper info = new InformationWrapper(in.readUTF(), in.readUTF(), in.readInt(), in.readInt());
+
+        return new AbstractBike(in.readUTF(), in.readUTF(), bk, info) {
+
+        };
+
+
+
+
+    }
 
 
 }

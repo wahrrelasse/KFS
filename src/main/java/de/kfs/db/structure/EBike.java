@@ -13,6 +13,12 @@ public class EBike extends AbstractBike{
 
 
 
+    private EBike (AbstractBike ab) {
+        this.internalNumber = ab.frameNumber;
+        this.frameNumber = ab.frameNumber;
+        this.bikeKey = ab.bikeKey;
+        this.additionalInfo = ab.additionalInfo;
+    }
     /**
      *
      * @return the type of Engine this EBike has
@@ -40,5 +46,19 @@ public class EBike extends AbstractBike{
 
     }
 
+    /**
+     *
+     * @param in the used inputstream
+     * @return new Ebike from the inputstream
+     * @throws IOException catched where in is created
+     */
+    public static EBike load (DataInputStream in) throws IOException {
+
+        EBike res = new EBike(AbstractBike.load(in));
+        res.backPedalBreak = in.readBoolean();
+        res.engineType = EngineType.valueOf(in.readUTF());
+
+        return res;
+    }
 
 }
