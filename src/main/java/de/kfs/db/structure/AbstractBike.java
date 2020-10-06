@@ -1,6 +1,8 @@
 package de.kfs.db.structure;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractBike {
@@ -9,9 +11,12 @@ public abstract class AbstractBike {
      * Abstract Class representing a Bike
      */
 
+
+
     protected String internalNumber;
     protected String frameNumber;
     protected BikeKey bikeKey;
+    protected InformationWrapper additionalInfo;
 
     public BikeKey getBikeKey() {
         return bikeKey;
@@ -21,7 +26,7 @@ public abstract class AbstractBike {
         this.bikeKey = bikeKey;
     }
 
-    protected InformationWrapper additionalInfo;
+
 
     /**
      * @return the number used to identify a bike at kfs
@@ -92,20 +97,29 @@ public abstract class AbstractBike {
 
     /**
      * save the general information for all bikes (no duplication in Bike & E-Bike)
-     * @param out the outputstream to save to
+     *
+     * @param out  the outputstream to save to
      * @param bike to be saved
      * @throws IOException gets caught where out is created
      */
     public static void save(DataOutputStream out, AbstractBike bike) throws IOException {
-       out.writeUTF(bike.internalNumber);
-       out.writeUTF(bike.frameNumber);
+
         //Key
-       out.writeUTF(bike.bikeKey.getFrameKey());
-       out.writeUTF(bike.bikeKey.getBpKey());
-       //InformationWrapper
+        out.writeUTF(bike.bikeKey.getFrameKey());
+        out.writeUTF(bike.bikeKey.getBpKey());
+
+
+        //InformationWrapper
         out.writeUTF(bike.additionalInfo.getManufacturer());
         out.writeUTF(bike.additionalInfo.getModelName());
         out.writeInt(bike.additionalInfo.getTireDiameter());
         out.writeInt(bike.additionalInfo.getFrameHeigth());
-    }
+        //General
+        out.writeUTF(bike.internalNumber);
+        out.writeUTF(bike.frameNumber);
+
+
+        }
+
+
 }

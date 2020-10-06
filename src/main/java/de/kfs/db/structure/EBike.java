@@ -1,6 +1,7 @@
 package de.kfs.db.structure;
 
 import javax.imageio.IIOException;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -9,6 +10,8 @@ public class EBike extends AbstractBike{
 
     private boolean backPedalBreak;
     private EngineType engineType;
+
+
 
     /**
      *
@@ -36,4 +39,6 @@ public class EBike extends AbstractBike{
 
 
     }
+
+
 }

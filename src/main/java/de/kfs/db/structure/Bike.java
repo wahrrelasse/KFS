@@ -1,6 +1,7 @@
 package de.kfs.db.structure;
 
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -17,4 +18,6 @@ public class Bike extends AbstractBike {
         AbstractBike.save(out, this);
 
     }
+
+
 }
