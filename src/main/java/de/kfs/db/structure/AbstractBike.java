@@ -11,7 +11,18 @@ public abstract class AbstractBike {
 
     protected String internalNumber;
     protected String frameNumber;
+    protected BikeKey bikeKey;
+
+    public BikeKey getBikeKey() {
+        return bikeKey;
+    }
+
+    public void setBikeKey(BikeKey bikeKey) {
+        this.bikeKey = bikeKey;
+    }
+
     protected InformationWrapper additionalInfo;
+
     /**
      * @return the number used to identify a bike at kfs
      */
@@ -27,7 +38,6 @@ public abstract class AbstractBike {
     }
 
     /**
-     *
      * @return the Wrapper of Information
      */
     public InformationWrapper getAdditionalInfo() {
@@ -36,6 +46,7 @@ public abstract class AbstractBike {
 
     /**
      * In case of modifications to a Bike (shouldn't be used often)
+     *
      * @param additionalInfo the new Wrapper for additional Information about a Bike
      */
     public void setAdditionalInfo(InformationWrapper additionalInfo) {
@@ -44,29 +55,35 @@ public abstract class AbstractBike {
 
     /**
      * saves a list of bikes into the filesystem
-     * @param file the file to save to
+     *
+     * @param file  the file to save to
      * @param bikes list of bikes to be saved
      */
     public static void save(File file, List<AbstractBike> bikes) {
 
-       try(DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file.getPath())))) {
+        try (DataOutputStream out = new DataOutputStream(
+                new BufferedOutputStream(new FileOutputStream(file.getPath())))) {
 
-           out.writeInt(bikes.size()); //lenght first
+            out.writeInt(bikes.size()); //lenght first
 
-           for(AbstractBike ab : bikes) {
-               if(ab instanceof Bike) {
-                   Bike b = (Bike) ab;
-                   b.save(out);
-               }
+            for (AbstractBike ab : bikes) {
+                if (ab instanceof Bike) {
+                    //TODO write some sort of identifier
+                    ((Bike) ab).save(out);
+                } else if (ab instanceof EBike) {
 
-           }
-       } catch (FileNotFoundException e) {
+                    ((EBike) ab).save(out);
+                }
 
-           e.printStackTrace();
-           //TODO errorStages
-       } catch (IOException e) {
 
-           e.printStackTrace();
-       }
+            }
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+            //TODO errorStages
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
     }
 }

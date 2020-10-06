@@ -14,6 +14,21 @@ public class InformationWrapper {
     private int frameHeigth;
     private int tireDiameter;
 
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public int getFrameHeigth() {
+        return frameHeigth;
+    }
+
+    public int getTireDiameter() {
+        return tireDiameter;
+    }
 
     /**
      *
@@ -23,7 +38,7 @@ public class InformationWrapper {
     @Override
     public String toString() {
 
-        String res = "";
+        String res = manufacturer + "; " + modelName + "; " +  tireDiameter + "; " + frameHeigth;
 
         return res;
     }
