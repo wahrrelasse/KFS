@@ -19,8 +19,7 @@ public class OpenViewPresenter {
     private MenuItem openMenu;
     @FXML
     private MenuItem openEMenu;
-    @FXML
-    private ImageView logoSpace;
+
 
     public OpenViewPresenter() {
 
