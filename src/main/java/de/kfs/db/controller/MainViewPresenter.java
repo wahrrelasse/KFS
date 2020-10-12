@@ -1,27 +1,37 @@
 package de.kfs.db.controller;
 
+import de.kfs.db.structure.AbstractBike;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import org.checkerframework.checker.units.qual.A;
 
 public class MainViewPresenter {
 
     public static String fxml = "/fxml/mainView.fxml";
 
+
+
     @FXML
-    public Button saveButton;
+    public TableView table;
     @FXML
-    public Button editButton;
+    public TableColumn numCol;
     @FXML
-    public Button deleteButton;
+    public TableColumn frameKeyCol;
+    @FXML
+    public TableColumn bpKeyCol;
+    @FXML
+    public TableColumn frameNumCol;
+    @FXML
+    public TableColumn extraInfoCol;
+
     @FXML
     public CheckBox onlyECheck;
     @FXML
     public ChoiceBox searchChoice;
-    @FXML
-    public TableView table;
     @FXML
     public TextField searchField;
     @FXML
@@ -30,10 +40,7 @@ public class MainViewPresenter {
     public TextField frameField;
     @FXML
     public TextField colorField;
-    @FXML
-    public Button advancedButton;
-    @FXML
-    public Button addButton;
+
     @FXML
     public TextField extraField;
     @FXML
@@ -41,6 +48,15 @@ public class MainViewPresenter {
     @FXML
     public TextField brandField;
 
+
+    @FXML
+    public void initialize() {
+        numCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("number"));
+        frameKeyCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("frameKey"));
+        bpKeyCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("bpKey"));
+        frameNumCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("frameNumber"));
+        extraInfoCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("info"));
+    }
 
     /**
      * Opens up save Dialogue and saves Data from table
