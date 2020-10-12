@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import org.checkerframework.checker.units.qual.A;
+
 
 public class MainViewPresenter {
 
@@ -16,22 +16,22 @@ public class MainViewPresenter {
 
 
     @FXML
-    public TableView table;
+    public TableView<AbstractBike> table;
     @FXML
-    public TableColumn numCol;
+    public TableColumn<AbstractBike, String> numCol;
     @FXML
-    public TableColumn frameKeyCol;
+    public TableColumn<AbstractBike, String> frameKeyCol;
     @FXML
-    public TableColumn bpKeyCol;
+    public TableColumn<AbstractBike, String> bpKeyCol;
     @FXML
-    public TableColumn frameNumCol;
+    public TableColumn<AbstractBike, String> frameNumCol;
     @FXML
-    public TableColumn extraInfoCol;
+    public TableColumn<AbstractBike, String> extraInfoCol;
 
     @FXML
     public CheckBox onlyECheck;
     @FXML
-    public ChoiceBox searchChoice;
+    public ChoiceBox<String> searchChoice;
     @FXML
     public TextField searchField;
     @FXML
@@ -51,11 +51,15 @@ public class MainViewPresenter {
 
     @FXML
     public void initialize() {
-        numCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("number"));
-        frameKeyCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("frameKey"));
-        bpKeyCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("bpKey"));
-        frameNumCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("frameNumber"));
-        extraInfoCol.setCellValueFactory(new PropertyValueFactory<AbstractBike, String>("info"));
+        numCol.setCellValueFactory(new PropertyValueFactory<>("number"));
+        frameKeyCol.setCellValueFactory(new PropertyValueFactory<>("frameKey"));
+        bpKeyCol.setCellValueFactory(new PropertyValueFactory<>("bpKey"));
+        frameNumCol.setCellValueFactory(new PropertyValueFactory<>("frameNumber"));
+        extraInfoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
+
+        searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
+
+
     }
 
     /**
