@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 
-public class AdvancedAddViewPresenter {
+public class AdvancedAddViewPresenter extends AbstractPresenter{
 
     public static String fxml = "/fxml/advancedAddView.fxml";
     @FXML

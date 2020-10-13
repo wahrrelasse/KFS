@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class DeleteViewPresenter {
+public class DeleteViewPresenter extends AbstractPresenter{
 
     public static String fxml = "/fxml/deleteView.fxml";
     @FXML
