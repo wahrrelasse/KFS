@@ -235,7 +235,8 @@ public class SceneManager {
     }
     @Subscribe
     public void onConfirmAddEvent(ConfirmAddEvent event) {
-        showMainScene();
+        eventBus.post(new UpdateBikeEvent());
+        secondaryStage.close();
     }
     @Subscribe
     public void onConfirmDeleteEvent(ConfirmDeleteEvent event) {
