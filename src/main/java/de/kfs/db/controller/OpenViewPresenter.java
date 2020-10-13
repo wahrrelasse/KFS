@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class OpenViewPresenter {
+public class OpenViewPresenter extends AbstractPresenter {
     public static final String fxml = "/fxml/openView.fxml";
 
     @FXML

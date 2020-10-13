@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
-public class MainViewPresenter {
+public class MainViewPresenter extends AbstractPresenter{
 
     public static String fxml = "/fxml/mainView.fxml";
 

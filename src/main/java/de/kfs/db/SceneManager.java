@@ -1,5 +1,6 @@
 package de.kfs.db;
 
+import com.google.common.eventbus.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.assistedinject.Assisted;
@@ -21,6 +22,7 @@ public class SceneManager {
     private Stage secondaryStage;
     private final Injector injector;
 
+
     private String lastTitle;
 
 
@@ -35,7 +37,8 @@ public class SceneManager {
     private Scene lastScene = null;
 
     @Inject
-    public SceneManager(Injector injected, @Assisted Stage primaryStage) {
+    public SceneManager(EventBus eventBus, Injector injected, @Assisted Stage primaryStage) {
+        eventBus.register(this);
         this.primaryStage = primaryStage;
         this.injector = injected;
         initViews();
