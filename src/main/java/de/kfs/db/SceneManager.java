@@ -1,10 +1,13 @@
 package de.kfs.db;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.assistedinject.Assisted;
 import de.kfs.db.controller.*;
+import de.kfs.db.events.main.OpenBikeDatabaseEvent;
+import de.kfs.db.events.main.OpenNewTableEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -180,6 +183,20 @@ public class SceneManager {
     public void showAdvancedAddScene() {
         showChildScene(advancedAddScene, "E-Bike hinzufügen...");
     }
+
+    //SceneControl events using guava eventbus
+
+    @Subscribe
+    public void onOpenNewTableEvent(OpenNewTableEvent event) { showMainScene(); }
+
+    @Subscribe
+    public void  onOpenBikeDatabaseEvent(OpenBikeDatabaseEvent event) {
+        //for now --> later with fileChooser, etc.
+
+        showMainScene();
+
+    }
+
 
 
 }
