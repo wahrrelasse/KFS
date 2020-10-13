@@ -1,5 +1,8 @@
 package de.kfs.db.structure;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,6 +73,26 @@ public abstract class AbstractBike {
     public void setAdditionalInfo(InformationWrapper additionalInfo) {
         this.additionalInfo = additionalInfo;
     }
+
+
+    public Property<String> numberProperty() {
+        return new SimpleStringProperty(this.frameNumber);
+    }
+    public Property<String> frameKeyProperty() {
+        return new SimpleStringProperty(this.bikeKey.getFrameKey());
+    }
+    public Property<String> bpKeyProperty() {
+        return new SimpleStringProperty(this.bikeKey.getBpKey());
+    }
+    public Property<String> frameNumberProperty() {
+        return new SimpleStringProperty(this.frameNumber);
+    }
+    public Property<String> infoProperty() {
+        return new SimpleStringProperty(this.additionalInfo.toString());
+    }
+
+
+
 
     /**
      * saves a list of bikes into the filesystem
