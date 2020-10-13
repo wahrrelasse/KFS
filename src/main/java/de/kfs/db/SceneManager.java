@@ -8,6 +8,9 @@ import com.google.inject.assistedinject.Assisted;
 import de.kfs.db.controller.*;
 import de.kfs.db.events.main.OpenBikeDatabaseEvent;
 import de.kfs.db.events.main.OpenNewTableEvent;
+import de.kfs.db.events.table.AdvancedAddEvent;
+import de.kfs.db.events.table.DeleteBikeEvent;
+import de.kfs.db.events.table.EditBikeEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +22,7 @@ import java.net.URL;
 /**
  * Class manages currently shown scene/window
  */
+@SuppressWarnings("UnstableApiUsage")
 public class SceneManager {
 
     private final Stage primaryStage;
@@ -195,6 +199,18 @@ public class SceneManager {
 
         showMainScene();
 
+    }
+    @Subscribe
+    public void onDeleteBikeEvent(DeleteBikeEvent event) {
+        showDeleteScene();
+    }
+    @Subscribe
+    public void onEditBikeEvent(EditBikeEvent event) {
+        showEditScene();
+    }
+    @Subscribe
+    public void onAdvancedAddEvent(AdvancedAddEvent event) {
+        showAdvancedAddScene();
     }
 
 
