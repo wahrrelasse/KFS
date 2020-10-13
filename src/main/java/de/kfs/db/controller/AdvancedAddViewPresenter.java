@@ -1,5 +1,6 @@
 package de.kfs.db.controller;
 
+import de.kfs.db.events.ConfirmAddEvent;
 import de.kfs.db.structure.EngineType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,5 +36,6 @@ public class AdvancedAddViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onAdvanceAddButtonPressed(ActionEvent actionEvent) {
+        eventBus.post(new ConfirmAddEvent());
     }
 }

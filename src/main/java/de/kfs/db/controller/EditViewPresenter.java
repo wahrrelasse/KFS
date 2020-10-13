@@ -1,5 +1,6 @@
 package de.kfs.db.controller;
 
+import de.kfs.db.events.ConfirmEditEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -29,5 +30,6 @@ public class EditViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onConfirmEditButtonPressed(ActionEvent actionEvent) {
+        eventBus.post(new ConfirmEditEvent());
     }
 }
