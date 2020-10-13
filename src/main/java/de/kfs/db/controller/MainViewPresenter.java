@@ -1,12 +1,11 @@
 package de.kfs.db.controller;
 
-import com.google.common.eventbus.EventBus;
+
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 import de.kfs.db.bikemanagent.BikeManagement;
 import de.kfs.db.events.management.UpdateBikeEvent;
 import de.kfs.db.structure.AbstractBike;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -20,7 +19,7 @@ public class MainViewPresenter extends AbstractPresenter{
 
     public static String fxml = "/fxml/mainView.fxml";
     private final BikeManagement bikeManagement;
-    private final EventBus eventBus;
+
 
 
     @FXML
@@ -66,14 +65,14 @@ public class MainViewPresenter extends AbstractPresenter{
         extraInfoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
 
         searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
-
+        searchChoice.setValue("Nummer");
 
     }
     @Inject
-    public MainViewPresenter(BikeManagement bm, EventBus bus) {
+    public MainViewPresenter(BikeManagement bm) {
         bikeManagement = bm;
-        eventBus = bus;
-        eventBus.register(this);
+
+
     }
 
     /**
