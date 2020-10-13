@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="290.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="de.kfs.db.controller.EditViewPresenter">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kfs.db.controller.EditViewPresenter">
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ändern" underline="true">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Text>
    <HBox alignment="CENTER" prefHeight="59.0" prefWidth="600.0">
-      <TextField alignment="CENTER" prefHeight="25.0" prefWidth="282.0" promptText="Radnummer eingeben..."/>
+      <TextField fx:id="numberField" alignment="CENTER" prefHeight="25.0" prefWidth="282.0" promptText="Radnummer eingeben..." />
    </HBox>
-   <Separator prefWidth="200.0"/>
+   <Separator prefWidth="200.0" />
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Neue Daten:" wrappingWidth="113.8359375">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Text>
    <HBox alignment="CENTER" prefHeight="73.0" prefWidth="600.0" spacing="20.0">
-      <TextField promptText="Neue Schlüsselnummer"/>
-      <TextField promptText="Neuer Akkuschlüssel"/>
-      <TextField/>
+      <TextField fx:id="newKeyField" promptText="Neue Schlüsselnummer" />
+      <TextField fx:id="newBpKeyField" promptText="Neuer Akkuschlüssel" />
    </HBox>
-   <HBox alignment="TOP_CENTER" prefHeight="61.0" prefWidth="600.0" spacing="20.0">
-      <TextField/>
-      <TextField/>
-      <TextField/>
+   <Separator prefWidth="200.0" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informationen nachtragen?">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Text>
+   <HBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0" spacing="20.0">
+      <TextField fx:id="frameHField" promptText="Rahmenhöhe?" />
+      <TextField fx:id="tireDField" promptText="Reifengröße?" />
+      <TextField fx:id="manufacturerField" promptText="Hersteller?" />
+      <TextField fx:id="colorField" promptText="Farbe?" />
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="73.0" prefWidth="600.0">
-      <Button fx:id="confirmEditButton" mnemonicParsing="false" onAction="#onConfirmEditButtonPressed"
-              prefHeight="35.0" prefWidth="100.0" text="Ändern"/>
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#onConfirmEditButtonPressed" prefHeight="35.0" prefWidth="100.0" text="Ändern" />
+      <padding>
+         <Insets top="5.0" />
+      </padding>
    </HBox>
 </VBox>

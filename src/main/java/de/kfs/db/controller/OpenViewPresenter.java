@@ -44,4 +44,11 @@ public class OpenViewPresenter extends AbstractPresenter {
     //TODO EventFile & Implentation
 
     }
+
+    /**
+     * should show help manual later
+     * @param actionEvent
+     */
+    public void onHelpPressed(ActionEvent actionEvent) {
+    }
 }

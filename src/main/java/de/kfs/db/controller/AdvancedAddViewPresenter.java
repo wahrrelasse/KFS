@@ -1,10 +1,11 @@
 package de.kfs.db.controller;
 
+import de.kfs.db.structure.EngineType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class AdvancedAddViewPresenter extends AbstractPresenter{
 
@@ -12,9 +13,21 @@ public class AdvancedAddViewPresenter extends AbstractPresenter{
     @FXML
     public CheckBox backPedalBrake;
     @FXML
-    public ChoiceBox engineChocie;
+    public ChoiceBox<EngineType> engineChocie;
     @FXML
-    public Button advancedAddButton;
+    public TextField numberField;
+    @FXML
+    public TextField keyNumField;
+    @FXML
+    public TextField bpKeyField;
+    @FXML
+    public TextField frameNumField;
+    @FXML
+    public TextField frameHField;
+    @FXML
+    public TextField tireDField;
+    @FXML
+    public TextField manufacturerField;
 
 
     /**
