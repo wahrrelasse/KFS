@@ -12,13 +12,12 @@
             <MenuItem fx:id="openEMenu" mnemonicParsing="false" onAction="#onOpenEBikesPressed" text="Öffne E-Bikes" />
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="Anleitung" />
+            <MenuItem mnemonicParsing="false" onAction="#onHelpPressed" text="Anleitung" />
         </Menu>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="348.0" prefWidth="582.0" VBox.vgrow="ALWAYS">
-        <ImageView  fitHeight="375.0" fitWidth="640.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
+    <AnchorPane prefHeight="348.0" prefWidth="582.0" VBox.vgrow="ALWAYS">
+        <ImageView fitHeight="375.0" fitWidth="640.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../logo.png" />
-         </image></ImageView>
+        </ImageView>
     </AnchorPane>
 </VBox>

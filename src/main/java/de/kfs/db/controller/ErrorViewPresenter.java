@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-public class ErrorViewPresenter {
+public class ErrorViewPresenter extends AbstractPresenter {
 
 
     @FXML
