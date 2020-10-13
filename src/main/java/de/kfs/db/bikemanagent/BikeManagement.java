@@ -82,6 +82,14 @@ public class BikeManagement {
     }
 
     /**
+     * Overrides the old Bike with the new one
+     * @param ab the edited Bike
+     */
+    public void editBike(AbstractBike ab) {
+
+    }
+
+    /**
      * Method to change the Predicate of the filteredList
      * effectively overrides current predicate
      * @param p the Predicate to be applied
