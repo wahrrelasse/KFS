@@ -31,11 +31,18 @@ public class AdvancedAddViewPresenter extends AbstractPresenter{
     public TextField manufacturerField;
 
 
+    @FXML
+    public void initialize() {
+        engineChocie.getItems().addAll(EngineType.BOSCH, EngineType.BAFANG, EngineType.SHIMANO, EngineType.SANTOUR);
+        engineChocie.setValue(EngineType.BOSCH);
+    }
     /**
      * Handles the addition of an E-Bike to the datastructure
      * @param actionEvent
      */
     public void onAdvanceAddButtonPressed(ActionEvent actionEvent) {
+
+
         eventBus.post(new ConfirmAddEvent());
     }
 }
