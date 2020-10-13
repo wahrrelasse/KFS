@@ -1,8 +1,15 @@
 package de.kfs.db.controller;
 
+
+
+import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
+import de.kfs.db.bikemanagent.BikeManagement;
+import de.kfs.db.events.management.UpdateBikeEvent;
 import de.kfs.db.events.table.AdvancedAddEvent;
 import de.kfs.db.events.table.DeleteBikeEvent;
 import de.kfs.db.events.table.EditBikeEvent;
+
 import de.kfs.db.structure.AbstractBike;
 import javafx.event.ActionEvent;
 
@@ -16,6 +23,7 @@ public class MainViewPresenter extends AbstractPresenter{
 
 
     public static String fxml = "/fxml/mainView.fxml";
+
 
 
 
@@ -62,9 +70,10 @@ public class MainViewPresenter extends AbstractPresenter{
         extraInfoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
 
         searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
-
+        searchChoice.setValue("Nummer");
 
     }
+
 
     /**
      * Opens up save Dialogue and saves Data from table
@@ -121,5 +130,15 @@ public class MainViewPresenter extends AbstractPresenter{
      */
     public void onAdvancedButtonPressed(ActionEvent actionEvent) {
         eventBus.post(new AdvancedAddEvent());
+    }
+
+    /**
+     * updates the bikes in current table using the data within
+     * the bikemanagement as soon as an UpdateBikeEvent is called
+     *
+     */
+    @Subscribe
+    public void updateBikes(UpdateBikeEvent event) {
+        table.setItems(bikeManagement.getFlBike());
     }
 }
