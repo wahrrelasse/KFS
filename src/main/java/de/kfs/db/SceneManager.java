@@ -5,9 +5,11 @@ import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.assistedinject.Assisted;
+import de.kfs.db.bikemanagent.BikeManagement;
 import de.kfs.db.controller.*;
 import de.kfs.db.events.main.OpenBikeDatabaseEvent;
 import de.kfs.db.events.main.OpenNewTableEvent;
+import de.kfs.db.events.management.UpdateBikeEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Class manages currently shown scene/window
@@ -24,6 +27,8 @@ public class SceneManager {
     private final Stage primaryStage;
     private Stage secondaryStage;
     private final Injector injector;
+    private final BikeManagement bikeManagement;
+    private final EventBus eventBus;
 
 
     private String lastTitle;
@@ -40,8 +45,10 @@ public class SceneManager {
     private Scene lastScene = null;
 
     @Inject
-    public SceneManager(EventBus eventBus, Injector injected, @Assisted Stage primaryStage) {
+    public SceneManager(EventBus eventBus, Injector injected, BikeManagement bm, @Assisted Stage primaryStage) {
+        this.eventBus = eventBus;
         eventBus.register(this);
+        bikeManagement = bm;
         this.primaryStage = primaryStage;
         this.injector = injected;
         initViews();
@@ -187,13 +194,23 @@ public class SceneManager {
     //SceneControl events using guava eventbus
 
     @Subscribe
-    public void onOpenNewTableEvent(OpenNewTableEvent event) { showMainScene(); }
+    public void onOpenNewTableEvent(OpenNewTableEvent event) {
+        //Empty table
+        bikeManagement.setInitialBikes(new ArrayList<>());
+
+        //posting that an update to data is available
+        eventBus.post(new UpdateBikeEvent());
+        showMainScene();
+    }
 
     @Subscribe
     public void  onOpenBikeDatabaseEvent(OpenBikeDatabaseEvent event) {
-        //for now --> later with fileChooser, etc.
+
+        bikeManagement.loadBikes();
+        eventBus.post(new UpdateBikeEvent());
 
         showMainScene();
+
 
     }
 

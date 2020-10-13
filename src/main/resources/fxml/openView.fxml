@@ -7,9 +7,9 @@
 <VBox prefHeight="380.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kfs.db.controller.OpenViewPresenter">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="File">
-            <MenuItem fx:id="openNew" mnemonicParsing="false" onAction="#onOpenNewPressed" text="Neu" />
-            <MenuItem fx:id="openMenu" mnemonicParsing="false" onAction="#onOpenBikePressed" text="Öffne Räder" />
-            <MenuItem fx:id="openEMenu" mnemonicParsing="false" onAction="#onOpenEBikesPressed" text="Öffne E-Bikes" />
+            <MenuItem mnemonicParsing="false" onAction="#onOpenNewPressed" text="Neu" />
+            <MenuItem mnemonicParsing="false" onAction="#onOpenBikePressed" text="Öffne Räder" />
+            <MenuItem mnemonicParsing="false" onAction="#onOpenEBikesPressed" text="Öffne E-Bikes" />
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
             <MenuItem mnemonicParsing="false" onAction="#onHelpPressed" text="Anleitung" />
