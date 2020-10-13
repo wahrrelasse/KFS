@@ -1,5 +1,6 @@
 package de.kfs.db.structure;
 
+import de.kfs.db.SceneManager;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -128,10 +129,9 @@ public abstract class AbstractBike {
             }
         } catch (FileNotFoundException e) {
 
-            e.printStackTrace();
-            //TODO errorStages
+            SceneManager.showWarning("File Not Found Exception (save)");
         } catch (IOException e) {
-
+            SceneManager.showSeriousError("IOException (save)");
             e.printStackTrace();
         }
     }
@@ -187,9 +187,10 @@ public abstract class AbstractBike {
 
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            SceneManager.showSeriousError("File Not Found Exception (load)");
+
         } catch (IOException e) {
-            e.printStackTrace();
+            SceneManager.showSeriousError("IOException (load)");
         }
 
         //If for some reason its null
