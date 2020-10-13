@@ -57,8 +57,33 @@ public class BikeManagement {
     }
 
     /**
+     * Adds a bike to the FilteredList.
+     * @implNote removes all Predicate, because it has to reconstruct the List
+     * @param toBeAdded the Bike to add to the List
+     */
+    public void addBike(AbstractBike toBeAdded) {
+        initialBikes.add(toBeAdded);
+        flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+
+    }
+    /**
+     * Deletes a bike from the FilteredList. I
+     * @implNote removes all Predicate, because it has to reconstruct the List
+     * @param internalNumber the number of the Bike to be deleted
+     */
+    public void deleteBike(String internalNumber) {
+        AbstractBike ab = AbstractBike.createDeleteComparisonBike(internalNumber);
+        if(flBike.contains(ab)) {
+            initialBikes.remove(ab);
+            flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+        } else {
+            //TODO warning
+        }
+    }
+
+    /**
      * Method to change the Predicate of the filteredList
-     * effectively overrides current prediacte
+     * effectively overrides current predicate
      * @param p the Predicate to be applied
      */
     public void changePredicate(Predicate p) {
