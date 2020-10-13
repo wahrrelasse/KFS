@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class EditViewPresenter {
+public class EditViewPresenter extends AbstractPresenter{
 
 
     public static String fxml = "/fxml/editView.fxml";

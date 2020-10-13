@@ -1,27 +1,38 @@
 package de.kfs.db.controller;
 
+import de.kfs.db.structure.AbstractBike;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
-public class MainViewPresenter {
+
+public class MainViewPresenter extends AbstractPresenter{
+
 
     public static String fxml = "/fxml/mainView.fxml";
 
+
+
     @FXML
-    public Button saveButton;
+    public TableView<AbstractBike> table;
     @FXML
-    public Button editButton;
+    public TableColumn<AbstractBike, String> numCol;
     @FXML
-    public Button deleteButton;
+    public TableColumn<AbstractBike, String> frameKeyCol;
+    @FXML
+    public TableColumn<AbstractBike, String> bpKeyCol;
+    @FXML
+    public TableColumn<AbstractBike, String> frameNumCol;
+    @FXML
+    public TableColumn<AbstractBike, String> extraInfoCol;
+
     @FXML
     public CheckBox onlyECheck;
     @FXML
-    public ChoiceBox searchChoice;
-    @FXML
-    public TableView table;
+    public ChoiceBox<String> searchChoice;
     @FXML
     public TextField searchField;
     @FXML
@@ -30,10 +41,7 @@ public class MainViewPresenter {
     public TextField frameField;
     @FXML
     public TextField colorField;
-    @FXML
-    public Button advancedButton;
-    @FXML
-    public Button addButton;
+
     @FXML
     public TextField extraField;
     @FXML
@@ -41,6 +49,19 @@ public class MainViewPresenter {
     @FXML
     public TextField brandField;
 
+
+    @FXML
+    public void initialize() {
+        numCol.setCellValueFactory(new PropertyValueFactory<>("number"));
+        frameKeyCol.setCellValueFactory(new PropertyValueFactory<>("frameKey"));
+        bpKeyCol.setCellValueFactory(new PropertyValueFactory<>("bpKey"));
+        frameNumCol.setCellValueFactory(new PropertyValueFactory<>("frameNumber"));
+        extraInfoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
+
+        searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
+
+
+    }
 
     /**
      * Opens up save Dialogue and saves Data from table
