@@ -18,7 +18,7 @@ public class MainViewPresenter extends AbstractPresenter{
 
 
     public static String fxml = "/fxml/mainView.fxml";
-    private final BikeManagement bikeManagement;
+
 
 
 
@@ -68,12 +68,7 @@ public class MainViewPresenter extends AbstractPresenter{
         searchChoice.setValue("Nummer");
 
     }
-    @Inject
-    public MainViewPresenter(BikeManagement bm) {
-        bikeManagement = bm;
 
-
-    }
 
     /**
      * Opens up save Dialogue and saves Data from table
