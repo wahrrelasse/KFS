@@ -15,6 +15,12 @@ public class Bike extends AbstractBike {
         this.bikeKey = ab.bikeKey;
         this.additionalInfo = ab.additionalInfo;
     }
+    public Bike(String iN,  String fN, BikeKey bk, InformationWrapper info) {
+        this.internalNumber = iN;
+        this.bikeKey = bk;
+        this.frameNumber = fN;
+        this.additionalInfo = info;
+    }
     /**
      * save one bike using an already created output stream
      * @param out the OutputStream to write to

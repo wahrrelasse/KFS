@@ -3,13 +3,13 @@ package de.kfs.db.controller;
 
 
 import com.google.common.eventbus.Subscribe;
+import de.kfs.db.SceneManager;
 import de.kfs.db.events.management.UpdateBikeEvent;
 import de.kfs.db.events.table.AdvancedAddEvent;
 import de.kfs.db.events.table.DeleteBikeEvent;
 import de.kfs.db.events.table.EditBikeEvent;
 
-import de.kfs.db.structure.AbstractBike;
-import de.kfs.db.structure.EBike;
+import de.kfs.db.structure.*;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -147,6 +147,22 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onAddButtonPressed(ActionEvent actionEvent) {
+        if (internalField.getText().isEmpty() || frameField.getText().isEmpty()) {
+            SceneManager.showWarning("Daten nicht korrekt eingegben");
+        } else {
+            addAction();
+        }
+
+    }
+
+    private void addAction() {
+
+        Bike b;
+        InformationWrapper info = new InformationWrapper(brandField.getText().trim(), colorField.getText().trim(), -1, -1);
+
+        b = new Bike(internalField.getText().trim(), frameField.getText().trim(), BikeKey.createNormalBikeKey(keyField.getText()), info);
+        bikeManagement.addBike(b);
+        updateBikes(null);
     }
 
     /**
