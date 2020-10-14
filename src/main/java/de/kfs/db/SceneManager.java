@@ -17,9 +17,11 @@ import de.kfs.db.events.table.AdvancedAddEvent;
 import de.kfs.db.events.table.DeleteBikeEvent;
 import de.kfs.db.events.table.EditBikeEvent;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -162,6 +164,26 @@ public class SceneManager {
         secondaryStage.show();
 
 
+    }
+
+    /**
+     * show an error alert instead of having a whole fxml/Presenter pair
+     * Further operation of the application will stop (e.g. IOException while loading)
+     * @param s the errorMessage to display
+     */
+    public static void showSeriousError(String s) {
+        Alert a = new Alert(Alert.AlertType.ERROR, s);
+        a.setOnCloseRequest(e -> Platform.exit());
+        a.show();
+    }
+
+    /**
+     * shows a warning to user e.g. missing information etc.
+     * @param s the message
+     */
+    public static void showWarning(String s) {
+        Alert a = new Alert(Alert.AlertType.WARNING, s);
+        a.show();
     }
 
     /**
