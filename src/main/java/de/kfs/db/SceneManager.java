@@ -223,7 +223,8 @@ public class SceneManager {
     }
     @Subscribe
     public void onDeleteBikeEvent(DeleteBikeEvent event) {
-        showDeleteScene();
+        secondaryStage.close();
+        eventBus.post(new UpdateBikeEvent());
     }
     @Subscribe
     public void onEditBikeEvent(EditBikeEvent event) {

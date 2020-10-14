@@ -10,12 +10,15 @@
       <font>
          <Font size="25.0" />
       </font>
+      <VBox.margin>
+         <Insets top="10.0" />
+      </VBox.margin>
    </Text>
-   <HBox alignment="CENTER" prefHeight="188.0" prefWidth="300.0" spacing="20.0">
-      <padding>
-         <Insets bottom="30.0" />
-      </padding>
+   <HBox alignment="TOP_CENTER" prefHeight="188.0" prefWidth="300.0" spacing="20.0">
       <TextField fx:id="deleteNumberField" promptText="Nummer..." />
       <Button mnemonicParsing="false" onAction="#onDeleteButtonPressed" prefHeight="35.0" prefWidth="100.0" text="Löschen" textFill="#9a0303" />
+      <padding>
+         <Insets top="50.0" />
+      </padding>
    </HBox>
 </VBox>
