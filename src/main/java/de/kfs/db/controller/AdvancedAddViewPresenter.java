@@ -68,6 +68,13 @@ public class AdvancedAddViewPresenter extends AbstractPresenter {
         } else {
             bikeKey = new BikeKey(keyNumField.getText().trim(), bpKeyField.getText().trim());
         }
+        //setting defaults if necessary
+        if(tireDField.getText().isEmpty()) {
+            if(frameHField.getText().isEmpty()) {
+                frameHField.setText("-1");
+            }
+            tireDField.setText("-1");
+        }
         InformationWrapper info = new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(tireDField.getText().trim()), Integer.parseInt(frameHField.getText().trim()));
 
         EBike eb = new EBike(numberField.getText().trim(), bikeKey, frameNumField.getText().trim(), info);
