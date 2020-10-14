@@ -1,13 +1,14 @@
 package de.kfs.db.bikemanagent;
 
 import de.kfs.db.SceneManager;
-import de.kfs.db.events.management.UpdateBikeEvent;
 import de.kfs.db.structure.AbstractBike;
+import de.kfs.db.structure.BikeKey;
+import de.kfs.db.structure.EBike;
+import de.kfs.db.structure.InformationWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,18 +86,42 @@ public class BikeManagement {
     }
 
     /**
-     * Overrides the old Bike with the new one
-     * @param ab the edited Bike
+     * Changes information of the bike
+     * it's expected for bk & info to be able to be null
+     * @param number the internalNumber of bike to edit
+     * @param bk the new BikeKey
+     * @param info the new InformationWrapper
      */
-    public void editBike(AbstractBike ab) {
+    public void editBike(String number, BikeKey bk, InformationWrapper info) {
+        int index = flBike.indexOf(AbstractBike.createDeleteComparisonBike(number));
 
-        if(flBike.contains(ab)) {
-            initialBikes.set(initialBikes.indexOf(ab), ab );
-            flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+
+
+        if(bk == null) {
+            flBike.get(index).getAdditionalInfo().merge(info);
+        } else if (info == null) {
+            if(bk.getFrameKey().isEmpty()) {
+                //changing bpKey only if its an EBike
+                if(flBike.get(index) instanceof EBike) {
+                    flBike.get(index).getBikeKey().setBpKey(bk.getBpKey());
+                }
+            } else {
+                flBike.get(index).getBikeKey().setFrameKey(bk.getFrameKey());
+            }
+
         } else {
-            SceneManager.showWarning("Rad wurde nicht gefunden \n--> konnte nicht editieren werden");
+            flBike.get(index).getAdditionalInfo().merge(info);
+            if(bk.getFrameKey().isEmpty()) {
+                //changing bpKey only if its an EBike
+                if(flBike.get(index) instanceof EBike) {
+                    flBike.get(index).getBikeKey().setBpKey(bk.getBpKey());
+                }
+            } else {
+                flBike.get(index).getBikeKey().setFrameKey(bk.getFrameKey());
+            }
         }
     }
+
 
     /**
      * Method to change the Predicate of the filteredList

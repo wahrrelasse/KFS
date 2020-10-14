@@ -33,6 +33,8 @@ public class InformationWrapper {
         this.tireDiameter = tireDiameter;
     }
 
+
+
     public String getManufacturer() {
         return manufacturer;
     }
@@ -49,6 +51,9 @@ public class InformationWrapper {
         return tireDiameter;
     }
 
+    public void merge(InformationWrapper other) {
+
+    }
     /**
      *
      * Usage: if needed to display information within a single String
