@@ -51,9 +51,6 @@ public class MainViewPresenter extends AbstractPresenter{
     public TextField frameField;
     @FXML
     public TextField colorField;
-
-    @FXML
-    public TextField extraField;
     @FXML
     public TextField keyField;
     @FXML
