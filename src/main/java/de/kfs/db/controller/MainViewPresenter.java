@@ -71,6 +71,11 @@ public class MainViewPresenter extends AbstractPresenter{
 
             if(newVal != null) {
                 searchField.setText("");
+                if(onlyECheck.isSelected()) {
+                    bikeManagement.changePredicate(p -> p instanceof EBike);
+                } else {
+                    bikeManagement.changePredicate(p -> true);
+                }
             }
         });
     }

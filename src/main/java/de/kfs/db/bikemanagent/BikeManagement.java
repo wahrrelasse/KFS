@@ -1,5 +1,7 @@
 package de.kfs.db.bikemanagent;
 
+import de.kfs.db.SceneManager;
+import de.kfs.db.events.management.UpdateBikeEvent;
 import de.kfs.db.structure.AbstractBike;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
@@ -52,7 +54,7 @@ public class BikeManagement {
 
         File file = fc.showSaveDialog(new Stage());
         if(file != null) AbstractBike.save(file, flBike); else {
-            //TODO errorHandling
+            SceneManager.showWarning("Datei wurde als null ausgewertet");
         }
     }
 
@@ -78,7 +80,7 @@ public class BikeManagement {
             initialBikes.remove(ab);
             flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
         } else {
-            //TODO warning
+            SceneManager.showWarning("Rad wurde nicht gefunden \n--> konnte nicht gelöscht werden");
         }
     }
 
@@ -88,6 +90,12 @@ public class BikeManagement {
      */
     public void editBike(AbstractBike ab) {
 
+        if(flBike.contains(ab)) {
+            initialBikes.set(initialBikes.indexOf(ab), ab );
+            flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+        } else {
+            SceneManager.showWarning("Rad wurde nicht gefunden \n--> konnte nicht editieren werden");
+        }
     }
 
     /**

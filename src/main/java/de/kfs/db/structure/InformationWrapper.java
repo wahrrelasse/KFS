@@ -17,12 +17,12 @@ public class InformationWrapper {
     public InformationWrapper(String manufacturer, String color, int frameHeigth, int tireDiameter) {
 
 
-        if(manufacturer.isEmpty()) {
+        if(manufacturer.trim().isEmpty()) {
             this.manufacturer = "DEFAULT";
         } else {
             this.manufacturer = manufacturer;
         }
-        if(manufacturer.isEmpty()) {
+        if(manufacturer.trim().isEmpty()) {
             this.color = "egal";
         } else {
             this.color = color;
