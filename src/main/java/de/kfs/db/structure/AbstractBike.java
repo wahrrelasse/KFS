@@ -197,7 +197,7 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
         if(bikes == null) {
             bikes = new AbstractBike[0];
         }
-        return Arrays.asList(bikes);
+        return new ArrayList<>(Arrays.asList(bikes));
 
     }
 

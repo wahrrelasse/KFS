@@ -1,6 +1,6 @@
 package de.kfs.db.structure;
 
-import javax.imageio.IIOException;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class EBike extends AbstractBike{
 
 
     private EBike (AbstractBike ab) {
-        this.internalNumber = ab.frameNumber;
+        this.internalNumber = ab.internalNumber;
         this.frameNumber = ab.frameNumber;
         this.bikeKey = ab.bikeKey;
         this.additionalInfo = ab.additionalInfo;
@@ -52,7 +52,7 @@ public class EBike extends AbstractBike{
         AbstractBike.save(out, this);
         //specific ebike Info
         out.writeBoolean(backPedalBreak);
-        out.writeUTF(engineType.name);
+        out.writeUTF(engineType.toString());
 
 
 
