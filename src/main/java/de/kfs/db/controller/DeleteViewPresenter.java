@@ -18,6 +18,8 @@ public class DeleteViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onDeleteButtonPressed(ActionEvent actionEvent) {
+        bikeManagement.deleteBike(deleteNumberField.getText().trim());
+
         eventBus.post(new ConfirmDeleteEvent());
     }
 }
