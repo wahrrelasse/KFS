@@ -82,7 +82,7 @@ public abstract class AbstractBike {
 
 
     public Property<String> numberProperty() {
-        return new SimpleStringProperty(this.frameNumber);
+        return new SimpleStringProperty(this.internalNumber);
     }
     public Property<String> frameKeyProperty() {
         return new SimpleStringProperty(this.bikeKey.getFrameKey());
