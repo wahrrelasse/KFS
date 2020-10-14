@@ -1,5 +1,6 @@
 package de.kfs.db.controller;
 
+import de.kfs.db.SceneManager;
 import de.kfs.db.events.ConfirmAddEvent;
 import de.kfs.db.structure.BikeKey;
 import de.kfs.db.structure.EBike;
@@ -32,6 +33,8 @@ public class AdvancedAddViewPresenter extends AbstractPresenter {
     public TextField tireDField;
     @FXML
     public TextField manufacturerField;
+    @FXML
+    public TextField colorField;
 
 
     @FXML
@@ -47,13 +50,25 @@ public class AdvancedAddViewPresenter extends AbstractPresenter {
      */
     public void onAdvanceAddButtonPressed(ActionEvent actionEvent) {
 
+        if(numberField.getText().isEmpty() || frameNumField.getText().isEmpty()) {
+            SceneManager.showWarning("Daten nicht korrekt eingegeben \n");
+        } else {
+            addAction();
+        }
+
+    }
+
+    /**
+     * HelperMethod, makes it easier to read
+     */
+    private void addAction() {
         BikeKey bikeKey;
         if (bpKeyField.getText().isEmpty()) {
             bikeKey = new BikeKey(keyNumField.getText().trim(), keyNumField.getText().trim());
         } else {
             bikeKey = new BikeKey(keyNumField.getText().trim(), bpKeyField.getText().trim());
         }
-        InformationWrapper info = new InformationWrapper(manufacturerField.getText().trim(), "Placeholder", Integer.valueOf(tireDField.getText().trim()), Integer.valueOf(frameHField.getText().trim()));
+        InformationWrapper info = new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(tireDField.getText().trim()), Integer.parseInt(frameHField.getText().trim()));
 
         EBike eb = new EBike(numberField.getText().trim(), bikeKey, frameNumField.getText().trim(), info);
         eb.setEngineType(engineChocie.getValue());
