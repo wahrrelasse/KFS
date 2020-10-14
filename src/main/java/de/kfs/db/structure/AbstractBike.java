@@ -152,7 +152,7 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
 
         //InformationWrapper
         out.writeUTF(bike.additionalInfo.getManufacturer());
-        out.writeUTF(bike.additionalInfo.getModelName());
+        out.writeUTF(bike.additionalInfo.getColor());
         out.writeInt(bike.additionalInfo.getTireDiameter());
         out.writeInt(bike.additionalInfo.getFrameHeigth());
         //General

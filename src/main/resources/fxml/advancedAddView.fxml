@@ -26,6 +26,7 @@
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="600.0" spacing="20.0">
       <TextField fx:id="manufacturerField" promptText="Marke" />
+      <TextField fx:id="colorField" promptText="Farbe" />
       <ChoiceBox fx:id="engineChocie" prefWidth="150.0" />
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="600.0" spacing="30.0">

@@ -10,13 +10,13 @@ public class InformationWrapper {
      */
 
     private String manufacturer;
-    private String modelName;
+    private String color;
     private int frameHeigth;
     private int tireDiameter;
 
-    public InformationWrapper(String manufacturer, String modelName, int frameHeigth, int tireDiameter) {
+    public InformationWrapper(String manufacturer, String color, int frameHeigth, int tireDiameter) {
         this.manufacturer = manufacturer;
-        this.modelName = modelName;
+        this.color = color;
         this.frameHeigth = frameHeigth;
         this.tireDiameter = tireDiameter;
     }
@@ -25,8 +25,8 @@ public class InformationWrapper {
         return manufacturer;
     }
 
-    public String getModelName() {
-        return modelName;
+    public String getColor() {
+        return color;
     }
 
     public int getFrameHeigth() {
@@ -45,7 +45,7 @@ public class InformationWrapper {
     @Override
     public String toString() {
 
-        String res = manufacturer + "; " + modelName + "; " +  tireDiameter + "; " + frameHeigth;
+        String res = manufacturer + "; " + color + "; " +  tireDiameter + "; " + frameHeigth;
 
         return res;
     }
