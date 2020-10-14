@@ -6,8 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class EBike extends AbstractBike{
-
-
     private boolean backPedalBreak;
     private EngineType engineType;
 
@@ -18,6 +16,12 @@ public class EBike extends AbstractBike{
         this.frameNumber = ab.frameNumber;
         this.bikeKey = ab.bikeKey;
         this.additionalInfo = ab.additionalInfo;
+    }
+    public EBike (String iN, BikeKey bk, String fN, InformationWrapper info) {
+        internalNumber = iN;
+        bikeKey = bk;
+        frameNumber = fN;
+        additionalInfo = info;
     }
     /**
      *
@@ -33,6 +37,14 @@ public class EBike extends AbstractBike{
      */
     public boolean hasBackPedalBreak() {
         return backPedalBreak;
+    }
+
+    public void setBackPedalBreak(boolean backPedalBreak) {
+        this.backPedalBreak = backPedalBreak;
+    }
+
+    public void setEngineType(EngineType engineType) {
+        this.engineType = engineType;
     }
 
     public void save(DataOutputStream out) throws IOException {
