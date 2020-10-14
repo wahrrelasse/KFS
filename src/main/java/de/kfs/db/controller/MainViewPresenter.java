@@ -3,14 +3,13 @@ package de.kfs.db.controller;
 
 
 import com.google.common.eventbus.Subscribe;
-import com.google.inject.Inject;
-import de.kfs.db.bikemanagent.BikeManagement;
 import de.kfs.db.events.management.UpdateBikeEvent;
 import de.kfs.db.events.table.AdvancedAddEvent;
 import de.kfs.db.events.table.DeleteBikeEvent;
 import de.kfs.db.events.table.EditBikeEvent;
 
 import de.kfs.db.structure.AbstractBike;
+import de.kfs.db.structure.EBike;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -71,7 +70,12 @@ public class MainViewPresenter extends AbstractPresenter{
 
         searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
         searchChoice.setValue("Nummer");
+        searchChoice.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
 
+            if(newVal != null) {
+                searchField.setText("");
+            }
+        });
     }
 
 
@@ -105,6 +109,11 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onOnlyEBikeChecked(ActionEvent actionEvent) {
+        if(onlyECheck.isSelected()) {
+            bikeManagement.changePredicate(p -> p instanceof EBike);
+        } else {
+            bikeManagement.changePredicate(p -> true);
+        }
     }
 
     /**
@@ -113,6 +122,23 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param keyEvent
      */
     public void onSearchFieldKeyReleased(KeyEvent keyEvent) {
+
+        switch (searchChoice.getValue()) {
+            case "Nummer":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getInternalNumber().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+            case "Schlüsselnummer":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getBikeKey().getFrameKey().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+            case "Rahmennummer":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getFrameNumber().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+            case "Weitere Informationen":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getAdditionalInfo().toString().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+        }
+
+
     }
 
     /**
