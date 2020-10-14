@@ -11,6 +11,7 @@ import de.kfs.db.events.table.DeleteBikeEvent;
 import de.kfs.db.events.table.EditBikeEvent;
 
 import de.kfs.db.structure.AbstractBike;
+import de.kfs.db.structure.EBike;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -105,6 +106,11 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onOnlyEBikeChecked(ActionEvent actionEvent) {
+        if(onlyECheck.isSelected()) {
+            bikeManagement.changePredicate(p -> p instanceof EBike);
+        } else {
+            bikeManagement.changePredicate(p -> true);
+        }
     }
 
     /**
