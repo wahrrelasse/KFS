@@ -63,6 +63,7 @@ public class BikeManagement {
      */
     public void addBike(AbstractBike toBeAdded) {
         initialBikes.add(toBeAdded);
+        initialBikes.sort(AbstractBike::compareTo);
         flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
 
     }

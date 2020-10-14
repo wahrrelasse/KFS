@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractBike {
+public abstract class AbstractBike implements Comparable<AbstractBike> {
 
     /**
      * Abstract Class representing a Bike
@@ -244,6 +244,9 @@ public abstract class AbstractBike {
 
         return false;
     }
-
+    @Override
+    public int compareTo(AbstractBike other) {
+        return this.internalNumber.compareToIgnoreCase(other.internalNumber);
+    }
 
 }
