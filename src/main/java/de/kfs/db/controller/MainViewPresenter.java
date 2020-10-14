@@ -82,7 +82,7 @@ public class MainViewPresenter extends AbstractPresenter{
      */
 
     public void onSaveButtonPressed(ActionEvent actionEvent) {
-
+        bikeManagement.saveBikes();
     }
 
     /**
