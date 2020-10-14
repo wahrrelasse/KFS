@@ -15,9 +15,21 @@ public class InformationWrapper {
     private int tireDiameter;
 
     public InformationWrapper(String manufacturer, String color, int frameHeigth, int tireDiameter) {
-        this.manufacturer = manufacturer;
-        this.color = color;
+
+
+        if(manufacturer.isEmpty()) {
+            this.manufacturer = "DEFAULT";
+        } else {
+            this.manufacturer = manufacturer;
+        }
+        if(manufacturer.isEmpty()) {
+            this.color = "egal";
+        } else {
+            this.color = color;
+        }
+
         this.frameHeigth = frameHeigth;
+
         this.tireDiameter = tireDiameter;
     }
 
