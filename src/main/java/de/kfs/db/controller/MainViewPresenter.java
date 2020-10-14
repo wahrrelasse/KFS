@@ -1,6 +1,15 @@
 package de.kfs.db.controller;
 
+
+
+import com.google.common.eventbus.Subscribe;
+import de.kfs.db.events.management.UpdateBikeEvent;
+import de.kfs.db.events.table.AdvancedAddEvent;
+import de.kfs.db.events.table.DeleteBikeEvent;
+import de.kfs.db.events.table.EditBikeEvent;
+
 import de.kfs.db.structure.AbstractBike;
+import de.kfs.db.structure.EBike;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -13,6 +22,7 @@ public class MainViewPresenter extends AbstractPresenter{
 
 
     public static String fxml = "/fxml/mainView.fxml";
+
 
 
 
@@ -59,9 +69,15 @@ public class MainViewPresenter extends AbstractPresenter{
         extraInfoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
 
         searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
+        searchChoice.setValue("Nummer");
+        searchChoice.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
 
-
+            if(newVal != null) {
+                searchField.setText("");
+            }
+        });
     }
+
 
     /**
      * Opens up save Dialogue and saves Data from table
@@ -77,6 +93,7 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onEditButtonPressed(ActionEvent actionEvent) {
+        eventBus.post(new EditBikeEvent());
     }
 
     /**
@@ -84,6 +101,7 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onDeleteButtonPressed(ActionEvent actionEvent) {
+        eventBus.post(new DeleteBikeEvent());
     }
 
     /**
@@ -91,6 +109,11 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onOnlyEBikeChecked(ActionEvent actionEvent) {
+        if(onlyECheck.isSelected()) {
+            bikeManagement.changePredicate(p -> p instanceof EBike);
+        } else {
+            bikeManagement.changePredicate(p -> true);
+        }
     }
 
     /**
@@ -99,6 +122,23 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param keyEvent
      */
     public void onSearchFieldKeyReleased(KeyEvent keyEvent) {
+
+        switch (searchChoice.getValue()) {
+            case "Nummer":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getInternalNumber().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+            case "Schlüsselnummer":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getBikeKey().getFrameKey().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+            case "Rahmennummer":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getFrameNumber().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+            case "Weitere Informationen":
+                bikeManagement.addPredicate(p -> ((AbstractBike) p).getAdditionalInfo().toString().toLowerCase().trim().contains(searchField.getText().toLowerCase().trim()));
+                break;
+        }
+
+
     }
 
     /**
@@ -115,5 +155,16 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onAdvancedButtonPressed(ActionEvent actionEvent) {
+        eventBus.post(new AdvancedAddEvent());
+    }
+
+    /**
+     * updates the bikes in current table using the data within
+     * the bikemanagement as soon as an UpdateBikeEvent is called
+     *
+     */
+    @Subscribe
+    public void updateBikes(UpdateBikeEvent event) {
+        table.setItems(bikeManagement.getFlBike());
     }
 }

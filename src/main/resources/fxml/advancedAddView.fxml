@@ -5,42 +5,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="272.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="de.kfs.db.controller.AdvancedAddViewPresenter">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kfs.db.controller.AdvancedAddViewPresenter">
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-Bike hinzufügen">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Text>
    <HBox alignment="TOP_CENTER" prefHeight="73.0" prefWidth="600.0" spacing="20.0">
       <padding>
-         <Insets top="10.0"/>
+         <Insets top="10.0" />
       </padding>
-      <TextField promptText="Radnummer"/>
-      <TextField promptText="Schlüsselnummer"/>
-      <TextField promptText="Akkuschlüsselnummer"/>
+      <TextField fx:id="numberField" promptText="Radnummer" />
+      <TextField fx:id="keyNumField" promptText="Schlüsselnummer" />
+      <TextField fx:id="bpKeyField" promptText="Akkuschlüsselnummer" />
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="56.0" prefWidth="600.0" spacing="20.0">
-      <TextField promptText="Rahmennummmer"/>
-      <TextField promptText="Rahmenhöhe"/>
-      <TextField promptText="Reifengröße"/>
+      <TextField fx:id="frameNumField" promptText="Rahmennummmer" />
+      <TextField fx:id="frameHField" promptText="Rahmenhöhe" />
+      <TextField fx:id="tireDField" promptText="Reifengröße" />
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="600.0" spacing="20.0">
-      <TextField promptText="Marke"/>
-      <ChoiceBox fx:id="engineChocie" prefWidth="150.0"/>
+      <TextField fx:id="manufacturerField" promptText="Marke" />
+      <ChoiceBox fx:id="engineChocie" prefWidth="150.0" />
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="600.0" spacing="30.0">
       <CheckBox fx:id="backPedalBrake" mnemonicParsing="false" text="Rücktritt?">
          <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
          </font>
          <padding>
-            <Insets top="5.0"/>
+            <Insets top="5.0" />
          </padding>
       </CheckBox>
-      <Button fx:id="advancedAddButton" mnemonicParsing="false" onAction="#onAdvanceAddButtonPressed"
-              prefHeight="35.0" prefWidth="100.0" text="Hinzufügen"/>
+      <Button mnemonicParsing="false" onAction="#onAdvanceAddButtonPressed" prefHeight="35.0" prefWidth="100.0" text="Hinzufügen" />
    </HBox>
 </VBox>

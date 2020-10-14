@@ -1,5 +1,6 @@
 package de.kfs.db.structure;
 
+import de.kfs.db.SceneManager;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -27,6 +28,11 @@ public abstract class AbstractBike {
     public AbstractBike() {
 
     }
+
+    private AbstractBike(String internalNumber) {
+        this.internalNumber = internalNumber;
+    }
+
     private AbstractBike (String internalNumber, String frameNumber, BikeKey bk, InformationWrapper info) {
         this.internalNumber = internalNumber;
         this.frameNumber = frameNumber;
@@ -123,10 +129,9 @@ public abstract class AbstractBike {
             }
         } catch (FileNotFoundException e) {
 
-            e.printStackTrace();
-            //TODO errorStages
+            SceneManager.showWarning("File Not Found Exception (save)");
         } catch (IOException e) {
-
+            SceneManager.showSeriousError("IOException (save)");
             e.printStackTrace();
         }
     }
@@ -182,9 +187,10 @@ public abstract class AbstractBike {
 
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            SceneManager.showSeriousError("File Not Found Exception (load)");
+
         } catch (IOException e) {
-            e.printStackTrace();
+            SceneManager.showSeriousError("IOException (load)");
         }
 
         //If for some reason its null
@@ -213,6 +219,30 @@ public abstract class AbstractBike {
 
 
 
+    }
+    //Comparison Methods
+    public static AbstractBike createDeleteComparisonBike(String internalNumber) {
+        return new AbstractBike(internalNumber) {
+
+        };
+    }
+
+
+    /**
+     * Overrides Equals based on the comparison of internalNumbers
+     * @param other the Object to compare to
+     * @return true if other is a bike and they have the same internalNumber
+     */
+    public boolean equals(Object other) {
+        if(other == null) {
+            return false;
+        }
+
+        if(other instanceof AbstractBike) {
+            return ((AbstractBike) other).internalNumber.equals(this.internalNumber);
+        }
+
+        return false;
     }
 
 
