@@ -82,7 +82,7 @@ public class SceneManager {
     private void initMainView() {
         if (mainScene == null) {
             Parent rootPane = initPresenter(MainViewPresenter.fxml);
-            mainScene = new Scene(rootPane, 800, 600);
+            mainScene = new Scene(rootPane, 850, 700);
         }
     }
 

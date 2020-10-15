@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kfs.db.controller.MainViewPresenter">
-   <TableView fx:id="table" editable="true" prefHeight="200.0" prefWidth="200.0">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kfs.db.controller.MainViewPresenter">
+   <TableView fx:id="table" editable="true" prefHeight="341.0" prefWidth="816.0">
       <columns>
          <TableColumn fx:id="numCol" prefWidth="75.0" text="Nummer" />
          <TableColumn prefWidth="135.0" text="Schlüssel">

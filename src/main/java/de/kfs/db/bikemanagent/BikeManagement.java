@@ -65,9 +65,15 @@ public class BikeManagement {
      * @param toBeAdded the Bike to add to the List
      */
     public void addBike(AbstractBike toBeAdded) {
-        initialBikes.add(toBeAdded);
-        initialBikes.sort(AbstractBike::compareTo);
-        flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+        if(!flBike.contains(toBeAdded)) {
+            initialBikes.add(toBeAdded);
+            initialBikes.sort(AbstractBike::compareTo);
+            flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+
+        } else {
+            SceneManager.showWarning("Radnummer bereits vergeben!");
+        }
+
 
     }
     /**
