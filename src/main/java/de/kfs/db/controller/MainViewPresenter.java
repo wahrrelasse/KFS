@@ -3,13 +3,13 @@ package de.kfs.db.controller;
 
 
 import com.google.common.eventbus.Subscribe;
+import de.kfs.db.SceneManager;
 import de.kfs.db.events.management.UpdateBikeEvent;
 import de.kfs.db.events.table.AdvancedAddEvent;
 import de.kfs.db.events.table.DeleteBikeEvent;
 import de.kfs.db.events.table.EditBikeEvent;
 
-import de.kfs.db.structure.AbstractBike;
-import de.kfs.db.structure.EBike;
+import de.kfs.db.structure.*;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -37,8 +37,13 @@ public class MainViewPresenter extends AbstractPresenter{
     @FXML
     public TableColumn<AbstractBike, String> frameNumCol;
     @FXML
-    public TableColumn<AbstractBike, String> extraInfoCol;
-
+    public TableColumn<AbstractBike, String> brandCol;
+    @FXML
+    public TableColumn<AbstractBike, String> colorCol;
+    @FXML
+    public TableColumn<AbstractBike, Integer> tireDCol;
+    @FXML
+    public TableColumn<AbstractBike, Integer> frameHCol;
     @FXML
     public CheckBox onlyECheck;
     @FXML
@@ -51,13 +56,11 @@ public class MainViewPresenter extends AbstractPresenter{
     public TextField frameField;
     @FXML
     public TextField colorField;
-
-    @FXML
-    public TextField extraField;
     @FXML
     public TextField keyField;
     @FXML
     public TextField brandField;
+
 
 
     @FXML
@@ -66,7 +69,13 @@ public class MainViewPresenter extends AbstractPresenter{
         frameKeyCol.setCellValueFactory(new PropertyValueFactory<>("frameKey"));
         bpKeyCol.setCellValueFactory(new PropertyValueFactory<>("bpKey"));
         frameNumCol.setCellValueFactory(new PropertyValueFactory<>("frameNumber"));
-        extraInfoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
+
+
+        brandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
+        tireDCol.setCellValueFactory(new PropertyValueFactory<>("tire"));
+        frameHCol.setCellValueFactory(new PropertyValueFactory<>("frameH"));
+
 
         searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
         searchChoice.setValue("Nummer");
@@ -74,6 +83,11 @@ public class MainViewPresenter extends AbstractPresenter{
 
             if(newVal != null) {
                 searchField.setText("");
+                if(onlyECheck.isSelected()) {
+                    bikeManagement.changePredicate(p -> p instanceof EBike);
+                } else {
+                    bikeManagement.changePredicate(p -> true);
+                }
             }
         });
     }
@@ -85,7 +99,7 @@ public class MainViewPresenter extends AbstractPresenter{
      */
 
     public void onSaveButtonPressed(ActionEvent actionEvent) {
-
+        bikeManagement.saveBikes();
     }
 
     /**
@@ -147,6 +161,22 @@ public class MainViewPresenter extends AbstractPresenter{
      * @param actionEvent
      */
     public void onAddButtonPressed(ActionEvent actionEvent) {
+        if (internalField.getText().isEmpty() || frameField.getText().isEmpty()) {
+            SceneManager.showWarning("Daten nicht korrekt eingegben");
+        } else {
+            addAction();
+        }
+
+    }
+
+    private void addAction() {
+
+        Bike b;
+        InformationWrapper info = new InformationWrapper(brandField.getText().trim(), colorField.getText().trim(), -1, -1);
+
+        b = new Bike(internalField.getText().trim(), frameField.getText().trim(), BikeKey.createNormalBikeKey(keyField.getText()), info);
+        bikeManagement.addBike(b);
+        updateBikes(null);
     }
 
     /**

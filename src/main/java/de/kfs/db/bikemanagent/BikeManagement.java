@@ -1,11 +1,14 @@
 package de.kfs.db.bikemanagent;
 
+import de.kfs.db.SceneManager;
 import de.kfs.db.structure.AbstractBike;
+import de.kfs.db.structure.BikeKey;
+import de.kfs.db.structure.EBike;
+import de.kfs.db.structure.InformationWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +55,7 @@ public class BikeManagement {
 
         File file = fc.showSaveDialog(new Stage());
         if(file != null) AbstractBike.save(file, flBike); else {
-            //TODO errorHandling
+            SceneManager.showWarning("Datei wurde als null ausgewertet");
         }
     }
 
@@ -62,8 +65,15 @@ public class BikeManagement {
      * @param toBeAdded the Bike to add to the List
      */
     public void addBike(AbstractBike toBeAdded) {
-        initialBikes.add(toBeAdded);
-        flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+        if(!flBike.contains(toBeAdded)) {
+            initialBikes.add(toBeAdded);
+            initialBikes.sort(AbstractBike::compareTo);
+            flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+
+        } else {
+            SceneManager.showWarning("Radnummer bereits vergeben!");
+        }
+
 
     }
     /**
@@ -77,17 +87,45 @@ public class BikeManagement {
             initialBikes.remove(ab);
             flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
         } else {
-            //TODO warning
+            SceneManager.showWarning("Rad wurde nicht gefunden \n--> konnte nicht gelöscht werden");
         }
     }
 
     /**
-     * Overrides the old Bike with the new one
-     * @param ab the edited Bike
+     * Changes information of the bike
+     * it's expected for bk & info to be able to be null
+     * @param number the internalNumber of bike to edit
+     * @param bk the new BikeKey
+     * @param info the new InformationWrapper
      */
-    public void editBike(AbstractBike ab) {
+    public void editBike(String number, BikeKey bk, InformationWrapper info) {
+        int index = flBike.indexOf(AbstractBike.createDeleteComparisonBike(number));
+        if (index < 0) {
+            SceneManager.showWarning("Rad wurde nicht gefunden\n--> keine Bearbeitung möglich");
+        } else {
+            AbstractBike ab = flBike.get(index);
 
+            if (bk != null) {
+                if (!bk.getFrameKey().isEmpty()) {
+                    ab.getBikeKey().setFrameKey(bk.getFrameKey());
+                }
+                if (!bk.getBpKey().isEmpty()) {
+                    if (ab instanceof EBike) {
+                        ab.getBikeKey().setBpKey(bk.getBpKey());
+                    }
+                }
+
+            }
+            if (info != null) {
+                ab.getAdditionalInfo().merge(info);
+            }
+
+
+            initialBikes.set(index, ab);
+            flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
+        }
     }
+
 
     /**
      * Method to change the Predicate of the filteredList

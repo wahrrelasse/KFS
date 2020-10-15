@@ -13,6 +13,10 @@ public class BikeKey {
         this.frameKey = fk;
     }
 
+    private BikeKey(String s) {
+        this.frameKey = s;
+        this.bpKey = "";
+    }
     /**
      *
      * @return Battery Pack Key Number
@@ -27,5 +31,23 @@ public class BikeKey {
      */
     public String getFrameKey() {
         return frameKey;
+    }
+
+    public void setFrameKey(String frameKey) {
+        this.frameKey = frameKey;
+    }
+
+    public void setBpKey(String bpKey) {
+        this.bpKey = bpKey;
+    }
+
+    /**
+     * Method for creating Keys of normal Bikes
+     * (They have no battery Pack)
+     * @param s the keyNumber
+     * @return BikeKey where only frameKey is important
+     */
+    public static BikeKey createNormalBikeKey(String s) {
+        return new BikeKey(s);
     }
 }

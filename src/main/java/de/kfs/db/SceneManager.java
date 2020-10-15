@@ -82,7 +82,7 @@ public class SceneManager {
     private void initMainView() {
         if (mainScene == null) {
             Parent rootPane = initPresenter(MainViewPresenter.fxml);
-            mainScene = new Scene(rootPane, 800, 600);
+            mainScene = new Scene(rootPane, 850, 700);
         }
     }
 
@@ -262,12 +262,14 @@ public class SceneManager {
     }
     @Subscribe
     public void onConfirmDeleteEvent(ConfirmDeleteEvent event) {
-        secondaryStage.close();
         eventBus.post(new UpdateBikeEvent());
+        secondaryStage.close();
+
     }
     @Subscribe
     public void onConfirmEditEvent(ConfirmEditEvent event) {
-        showMainScene();
+        eventBus.post(new UpdateBikeEvent());
+        secondaryStage.close();
     }
 
 

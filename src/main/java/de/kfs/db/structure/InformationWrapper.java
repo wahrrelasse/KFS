@@ -10,23 +10,37 @@ public class InformationWrapper {
      */
 
     private String manufacturer;
-    private String modelName;
+    private String color;
     private int frameHeigth;
     private int tireDiameter;
 
-    public InformationWrapper(String manufacturer, String modelName, int frameHeigth, int tireDiameter) {
-        this.manufacturer = manufacturer;
-        this.modelName = modelName;
+    public InformationWrapper(String manufacturer, String color, int frameHeigth, int tireDiameter) {
+
+
+        if(manufacturer.trim().isEmpty()) {
+            this.manufacturer = "DEFAULT";
+        } else {
+            this.manufacturer = manufacturer;
+        }
+        if(manufacturer.trim().isEmpty()) {
+            this.color = "egal";
+        } else {
+            this.color = color;
+        }
+
         this.frameHeigth = frameHeigth;
+
         this.tireDiameter = tireDiameter;
     }
+
+
 
     public String getManufacturer() {
         return manufacturer;
     }
 
-    public String getModelName() {
-        return modelName;
+    public String getColor() {
+        return color;
     }
 
     public int getFrameHeigth() {
@@ -38,6 +52,26 @@ public class InformationWrapper {
     }
 
     /**
+     * merge the param into the calling wrapper. Only non-default, not empty
+     * values of param will be used to override callings wrapper's attributes
+     * defaults: manufacturer "DEFAULT", color "egal", tireDiameter & frameHeight -1
+     * @param other Wrapper that has the information to merge into calling wrapper
+     */
+    public void merge(InformationWrapper other) {
+        if(!(other.manufacturer.isEmpty() || other.manufacturer.equals("DEFAULT"))) {
+            this.manufacturer = other.manufacturer;
+        }
+        if (!(other.color.isEmpty() || other.color.equals("egal"))) {
+            this.color = other.color;
+        }
+        if (other.tireDiameter != -1) {
+            this.tireDiameter = other.tireDiameter;
+        }
+        if (other.frameHeigth != -1) {
+            this.frameHeigth = other.frameHeigth;
+        }
+    }
+    /**
      *
      * Usage: if needed to display information within a single String
      * @return a nicely formatted String to display Information
@@ -45,7 +79,7 @@ public class InformationWrapper {
     @Override
     public String toString() {
 
-        String res = manufacturer + "; " + modelName + "; " +  tireDiameter + "; " + frameHeigth;
+        String res = manufacturer + "; " + color + "; " +  tireDiameter + "; " + frameHeigth;
 
         return res;
     }
