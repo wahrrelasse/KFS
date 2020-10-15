@@ -2,7 +2,9 @@ package de.kfs.db.structure;
 
 import de.kfs.db.SceneManager;
 import javafx.beans.property.Property;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.Parent;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -93,9 +95,19 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
     public Property<String> frameNumberProperty() {
         return new SimpleStringProperty(this.frameNumber);
     }
-    public Property<String> infoProperty() {
-        return new SimpleStringProperty(this.additionalInfo.toString());
+    public Property<String> brandProperty() {
+        return new SimpleStringProperty(this.additionalInfo.getManufacturer());
     }
+    public Property<String> colorProperty() {
+        return new SimpleStringProperty(this.additionalInfo.getColor());
+    }
+    public Property<Number> tireProperty() {
+        return new SimpleIntegerProperty(this.additionalInfo.getTireDiameter());
+    }
+    public Property<Number> frameHProperty() {
+        return new SimpleIntegerProperty(this.additionalInfo.getFrameHeigth());
+    }
+
 
 
 

@@ -37,8 +37,13 @@ public class MainViewPresenter extends AbstractPresenter{
     @FXML
     public TableColumn<AbstractBike, String> frameNumCol;
     @FXML
-    public TableColumn<AbstractBike, String> extraInfoCol;
-
+    public TableColumn<AbstractBike, String> brandCol;
+    @FXML
+    public TableColumn<AbstractBike, String> colorCol;
+    @FXML
+    public TableColumn<AbstractBike, Integer> tireDCol;
+    @FXML
+    public TableColumn<AbstractBike, Integer> frameHCol;
     @FXML
     public CheckBox onlyECheck;
     @FXML
@@ -57,13 +62,20 @@ public class MainViewPresenter extends AbstractPresenter{
     public TextField brandField;
 
 
+
     @FXML
     public void initialize() {
         numCol.setCellValueFactory(new PropertyValueFactory<>("number"));
         frameKeyCol.setCellValueFactory(new PropertyValueFactory<>("frameKey"));
         bpKeyCol.setCellValueFactory(new PropertyValueFactory<>("bpKey"));
         frameNumCol.setCellValueFactory(new PropertyValueFactory<>("frameNumber"));
-        extraInfoCol.setCellValueFactory(new PropertyValueFactory<>("info"));
+
+
+        brandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        colorCol.setCellValueFactory(new PropertyValueFactory<>("color"));
+        tireDCol.setCellValueFactory(new PropertyValueFactory<>("tire"));
+        frameHCol.setCellValueFactory(new PropertyValueFactory<>("frameH"));
+
 
         searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
         searchChoice.setValue("Nummer");
