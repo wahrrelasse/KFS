@@ -33,6 +33,14 @@ public class BikeKey {
         return frameKey;
     }
 
+    public void setFrameKey(String frameKey) {
+        this.frameKey = frameKey;
+    }
+
+    public void setBpKey(String bpKey) {
+        this.bpKey = bpKey;
+    }
+
     /**
      * Method for creating Keys of normal Bikes
      * (They have no battery Pack)

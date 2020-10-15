@@ -75,7 +75,7 @@ public class AdvancedAddViewPresenter extends AbstractPresenter {
             }
             tireDField.setText("-1");
         }
-        InformationWrapper info = new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(tireDField.getText().trim()), Integer.parseInt(frameHField.getText().trim()));
+        InformationWrapper info = new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(frameHField.getText().trim()), Integer.parseInt(tireDField.getText().trim()));
 
         EBike eb = new EBike(numberField.getText().trim(), bikeKey, frameNumField.getText().trim(), info);
         eb.setEngineType(engineChocie.getValue());
