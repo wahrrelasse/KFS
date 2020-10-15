@@ -94,31 +94,29 @@ public class BikeManagement {
      */
     public void editBike(String number, BikeKey bk, InformationWrapper info) {
         int index = flBike.indexOf(AbstractBike.createDeleteComparisonBike(number));
-
-
-
-        if(bk == null) {
-            flBike.get(index).getAdditionalInfo().merge(info);
-        } else if (info == null) {
-            if(bk.getFrameKey().isEmpty()) {
-                //changing bpKey only if its an EBike
-                if(flBike.get(index) instanceof EBike) {
-                    flBike.get(index).getBikeKey().setBpKey(bk.getBpKey());
-                }
-            } else {
-                flBike.get(index).getBikeKey().setFrameKey(bk.getFrameKey());
-            }
-
+        if (index < 0) {
+            SceneManager.showWarning("Rad wurde nicht gefunden\n--> keine Bearbeitung möglich");
         } else {
-            flBike.get(index).getAdditionalInfo().merge(info);
-            if(bk.getFrameKey().isEmpty()) {
-                //changing bpKey only if its an EBike
-                if(flBike.get(index) instanceof EBike) {
-                    flBike.get(index).getBikeKey().setBpKey(bk.getBpKey());
+            AbstractBike ab = flBike.get(index);
+
+            if (bk != null) {
+                if (!bk.getFrameKey().isEmpty()) {
+                    ab.getBikeKey().setFrameKey(bk.getFrameKey());
                 }
-            } else {
-                flBike.get(index).getBikeKey().setFrameKey(bk.getFrameKey());
+                if (!bk.getBpKey().isEmpty()) {
+                    if (ab instanceof EBike) {
+                        ab.getBikeKey().setBpKey(bk.getBpKey());
+                    }
+                }
+
             }
+            if (info != null) {
+                ab.getAdditionalInfo().merge(info);
+            }
+
+
+            initialBikes.set(index, ab);
+            flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
         }
     }
 

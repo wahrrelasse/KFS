@@ -36,8 +36,8 @@ public class EditViewPresenter extends AbstractPresenter{
         if(!numberField.getText().trim().isEmpty()) {
 
             if((newKeyField.getText().trim().isEmpty() && newBpKeyField.getText().trim().isEmpty())
-                    || (!tireDField.getText().trim().isEmpty() || !frameHField.getText().trim().isEmpty()
-                    || !manufacturerField.getText().trim().isEmpty() || !colorField.getText().trim().isEmpty())) {
+                    && (tireDField.getText().trim().isEmpty() && frameHField.getText().trim().isEmpty()
+                    && manufacturerField.getText().trim().isEmpty() && colorField.getText().trim().isEmpty())) {
                 SceneManager.showWarning("Keine Änderungen eingegebene!");
             } else {
                 editAction();
@@ -54,7 +54,7 @@ public class EditViewPresenter extends AbstractPresenter{
         //3 cases: edit only informationWrapper, edit only Key, edit both
         if(newKeyField.getText().trim().isEmpty() && newBpKeyField.getText().trim().isEmpty()) {
 
-            bikeManagement.editBike(numberField.getText().trim(), null, new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(frameHField.getText().trim()), Integer.parseInt(tireDField.getText().trim())));
+            bikeManagement.editBike(numberField.getText().trim(), null, checkInfo());
 
         } else if(tireDField.getText().trim().isEmpty() && frameHField.getText().trim().isEmpty() &&
                 manufacturerField.getText().trim().isEmpty() && colorField.getText().trim().isEmpty()) {
@@ -62,9 +62,24 @@ public class EditViewPresenter extends AbstractPresenter{
             bikeManagement.editBike(numberField.getText().trim(), new BikeKey(newKeyField.getText().trim(), newBpKeyField.getText().trim()), null);
 
         } else {
-            bikeManagement.editBike(numberField.getText().trim(), new BikeKey(newKeyField.getText().trim(), newBpKeyField.getText().trim()), new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(frameHField.getText().trim()), Integer.parseInt(tireDField.getText().trim())));
+            bikeManagement.editBike(numberField.getText().trim(), new BikeKey(newKeyField.getText().trim(), newBpKeyField.getText().trim()), checkInfo());
         }
 
         eventBus.post(new ConfirmEditEvent());
+    }
+
+    private InformationWrapper checkInfo() {
+        if (tireDField.getText().trim().isEmpty()) {
+            if (frameHField.getText().trim().isEmpty()) {
+                return new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), -1, -1);
+            } else {
+                return new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(frameHField.getText().trim()), -1);
+            }
+        } else if (frameHField.getText().trim().isEmpty()) {
+            return new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), -1, Integer.parseInt(tireDField.getText().trim()));
+        } else {
+            return new InformationWrapper(manufacturerField.getText().trim(), colorField.getText().trim(), Integer.parseInt(frameHField.getText().trim()), Integer.parseInt(tireDField.getText().trim()));
+
+        }
     }
 }
