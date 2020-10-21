@@ -65,7 +65,7 @@ public class BikeManagement {
      * @param toBeAdded the Bike to add to the List
      */
     public void addBike(AbstractBike toBeAdded) {
-        if(!flBike.contains(toBeAdded)) {
+        if(!initialBikes.contains(toBeAdded)) {
             initialBikes.add(toBeAdded);
             initialBikes.sort(AbstractBike::compareTo);
             flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
@@ -83,7 +83,7 @@ public class BikeManagement {
      */
     public void deleteBike(String internalNumber) {
         AbstractBike ab = AbstractBike.createDeleteComparisonBike(internalNumber);
-        if(flBike.contains(ab)) {
+        if(initialBikes.contains(ab)) {
             initialBikes.remove(ab);
             flBike = new FilteredList<>(FXCollections.observableList(initialBikes), p -> true);
         } else {
@@ -99,11 +99,11 @@ public class BikeManagement {
      * @param info the new InformationWrapper
      */
     public void editBike(String number, BikeKey bk, InformationWrapper info) {
-        int index = flBike.indexOf(AbstractBike.createDeleteComparisonBike(number));
+        int index = initialBikes.indexOf(AbstractBike.createDeleteComparisonBike(number));
         if (index < 0) {
             SceneManager.showWarning("Rad wurde nicht gefunden\n--> keine Bearbeitung möglich");
         } else {
-            AbstractBike ab = flBike.get(index);
+            AbstractBike ab = initialBikes.get(index);
 
             if (bk != null) {
                 if (!bk.getFrameKey().isEmpty()) {
