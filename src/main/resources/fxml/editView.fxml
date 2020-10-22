@@ -31,8 +31,8 @@
       </font>
    </Text>
    <HBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0" spacing="20.0">
-      <TextField fx:id="frameHField" promptText="Rahmenhöhe?" />
       <TextField fx:id="tireDField" promptText="Reifengröße?" />
+      <TextField fx:id="frameHField" promptText="Rahmenhöhe?" />
       <TextField fx:id="manufacturerField" promptText="Hersteller?" />
       <TextField fx:id="colorField" promptText="Farbe?" />
    </HBox>

@@ -21,8 +21,8 @@
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="56.0" prefWidth="600.0" spacing="20.0">
       <TextField fx:id="frameNumField" promptText="Rahmennummmer" />
-      <TextField fx:id="frameHField" promptText="Rahmenhöhe" />
       <TextField fx:id="tireDField" promptText="Reifengröße" />
+      <TextField fx:id="frameHField" promptText="Rahmenhöhe" />
    </HBox>
    <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="600.0" spacing="20.0">
       <TextField fx:id="manufacturerField" promptText="Marke" />
