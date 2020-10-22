@@ -1,6 +1,7 @@
 package de.kfs.db.controller;
 
 import de.kfs.db.SceneManager;
+import de.kfs.db.controller.filter.IntegerFieldFilter;
 import de.kfs.db.events.ConfirmAddEvent;
 import de.kfs.db.structure.BikeKey;
 import de.kfs.db.structure.EBike;
@@ -41,6 +42,8 @@ public class AdvancedAddViewPresenter extends AbstractPresenter {
     public void initialize() {
         engineChocie.getItems().addAll(EngineType.BOSCH, EngineType.BAFANG, EngineType.SHIMANO, EngineType.SANTOUR);
         engineChocie.setValue(EngineType.BOSCH);
+        tireDField.setTextFormatter(new IntegerFieldFilter());
+        frameHField.setTextFormatter(new IntegerFieldFilter());
     }
 
     /**
