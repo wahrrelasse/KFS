@@ -4,7 +4,7 @@ import de.kfs.db.SceneManager;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.Parent;
+
 
 import java.io.*;
 import java.util.ArrayList;
@@ -106,6 +106,25 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
     }
     public Property<Number> frameHProperty() {
         return new SimpleIntegerProperty(this.additionalInfo.getFrameHeigth());
+    }
+    public Property<String> backPedalProperty() {
+        if(this instanceof EBike) {
+            if(((EBike) this).hasBackPedalBreak()) {
+                return new SimpleStringProperty("Rücktritt");
+            } else {
+                return new SimpleStringProperty("Freilauf");
+            }
+
+        } else {
+            return new SimpleStringProperty("");
+        }
+    }
+    public Property<String> engineProperty() {
+        if(this instanceof EBike) {
+            return new SimpleStringProperty(((EBike) this).getEngineType().name);
+        } else {
+            return new SimpleStringProperty("");
+        }
     }
 
 

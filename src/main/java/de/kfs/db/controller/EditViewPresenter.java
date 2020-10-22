@@ -1,6 +1,7 @@
 package de.kfs.db.controller;
 
 import de.kfs.db.SceneManager;
+import de.kfs.db.controller.filter.IntegerFieldFilter;
 import de.kfs.db.events.ConfirmEditEvent;
 import de.kfs.db.structure.BikeKey;
 import de.kfs.db.structure.InformationWrapper;
@@ -28,6 +29,12 @@ public class EditViewPresenter extends AbstractPresenter{
     @FXML
     public TextField colorField;
 
+
+    @FXML
+    public void initialize() {
+        frameHField.setTextFormatter(new IntegerFieldFilter());
+        tireDField.setTextFormatter(new IntegerFieldFilter());
+    }
     /**
      * Handles the editing of a bike Object with new Data gathered from textfields
      * @param actionEvent
