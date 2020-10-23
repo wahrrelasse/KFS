@@ -55,7 +55,7 @@ public class BikeManagement {
     public void saveBikes() {
         final FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tabelle der Räder", "*.rdb"));
-        fc.setInitialDirectory(new File(workingpath)); //TODO NetworkPath Conflicts
+        fc.setInitialDirectory(new File(workingpath).getParentFile()); //TODO NetworkPath Conflicts
         File file = fc.showSaveDialog(new Stage());
 
         if(file != null) AbstractBike.save(file, flBike); else {
