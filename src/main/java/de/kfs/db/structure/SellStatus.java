@@ -23,7 +23,9 @@ public class SellStatus {
         this.sold = sold;
     }
 
-
+    public Date getBoughtOn() {
+        return boughtOn;
+    }
 
     public static void save(DataOutputStream out, SellStatus ss) throws IOException {
         out.writeLong(ss.boughtOn.getTime());
