@@ -197,7 +197,8 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
         //General
         out.writeUTF(bike.internalNumber);
         out.writeUTF(bike.frameNumber);
-
+        //SellStatus
+        SellStatus.save(out, bike.ss);
 
         }
 
@@ -251,10 +252,11 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
         BikeKey bk = new BikeKey(in.readUTF(), in.readUTF());
         InformationWrapper info = new InformationWrapper(in.readUTF(), in.readUTF(), in.readInt(), in.readInt());
 
-        return new AbstractBike(in.readUTF(), in.readUTF(), bk, info) {
+        AbstractBike ab = new AbstractBike(in.readUTF(), in.readUTF(), bk, info) {
 
         };
-
+        ab.setSellStatus(SellStatus.load(in));
+        return ab;
 
 
 

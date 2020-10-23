@@ -25,13 +25,13 @@ public class SellStatus {
 
 
 
-    public void save(DataOutputStream out) throws IOException {
-        out.writeLong(boughtOn.getTime());
-        out.writeBoolean(sold);
+    public static void save(DataOutputStream out, SellStatus ss) throws IOException {
+        out.writeLong(ss.boughtOn.getTime());
+        out.writeBoolean(ss.sold);
 
 
     }
-    public SellStatus load(DataInputStream in) throws IOException {
+    public static SellStatus load(DataInputStream in) throws IOException {
         return new SellStatus(new Date(in.readLong()), in.readBoolean());
     }
 }
