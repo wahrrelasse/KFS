@@ -1,5 +1,6 @@
 package de.kfs.db.controller;
 
+import de.kfs.db.controller.filter.IntegerFieldFilter;
 import de.kfs.db.events.ConfirmDeleteEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +12,10 @@ public class DeleteViewPresenter extends AbstractPresenter{
     @FXML
     public TextField deleteNumberField;
 
-
+    @FXML
+    public void initialize() {
+        deleteNumberField.setTextFormatter(new IntegerFieldFilter());
+    }
     /**
      * deletes the Bike specified by internalNumber out of the textField
      *
