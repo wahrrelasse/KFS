@@ -182,6 +182,7 @@ public class MainViewPresenter extends AbstractPresenter{
         InformationWrapper info = new InformationWrapper(brandField.getText().trim(), colorField.getText().trim(), -1, -1);
 
         b = new Bike(internalField.getText().trim(), frameField.getText().trim(), BikeKey.createNormalBikeKey(keyField.getText()), info);
+        b.setSellStatus(new SellStatus());
         bikeManagement.addBike(b);
         updateBikes(null);
     }
