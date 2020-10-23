@@ -19,6 +19,7 @@ public class BikeManagement {
     private  List<AbstractBike> initialBikes;
 
     private FilteredList<AbstractBike> flBike;
+    private String workingpath = "";
 
 
 
@@ -38,7 +39,8 @@ public class BikeManagement {
      */
     public void loadBikes() {
         final FileChooser fc = new FileChooser();
-        File file = fc.showOpenDialog(new Stage());
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tabelle der Räder", "*.rdb"));File file = fc.showOpenDialog(new Stage());
+        workingpath = file.getPath();
         if(file != null) {
             setInitialBikes(AbstractBike.load(file));
         } else {
@@ -52,8 +54,10 @@ public class BikeManagement {
      */
     public void saveBikes() {
         final FileChooser fc = new FileChooser();
-
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tabelle der Räder", "*.rdb"));
+        fc.setInitialDirectory(new File(workingpath)); //TODO NetworkPath Conflicts
         File file = fc.showSaveDialog(new Stage());
+
         if(file != null) AbstractBike.save(file, flBike); else {
             SceneManager.showWarning("Datei wurde als null ausgewertet");
         }
