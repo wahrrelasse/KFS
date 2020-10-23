@@ -23,6 +23,7 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
     protected String frameNumber;
     protected BikeKey bikeKey;
     protected InformationWrapper additionalInfo;
+    protected SellStatus ss;
 
     /**
      * default constructor
@@ -51,6 +52,13 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
     }
 
 
+    public SellStatus getSellStatus() {
+        return ss;
+    }
+
+    public void setSellStatus(SellStatus ss) {
+        this.ss = ss;
+    }
 
     /**
      * @return the number used to identify a bike at kfs
