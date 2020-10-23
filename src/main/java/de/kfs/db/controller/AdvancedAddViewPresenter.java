@@ -3,10 +3,7 @@ package de.kfs.db.controller;
 import de.kfs.db.SceneManager;
 import de.kfs.db.controller.filter.IntegerFieldFilter;
 import de.kfs.db.events.ConfirmAddEvent;
-import de.kfs.db.structure.BikeKey;
-import de.kfs.db.structure.EBike;
-import de.kfs.db.structure.EngineType;
-import de.kfs.db.structure.InformationWrapper;
+import de.kfs.db.structure.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -85,6 +82,7 @@ public class AdvancedAddViewPresenter extends AbstractPresenter {
 
 
         eb.setBackPedalBreak(backPedalBrake.isSelected());
+        eb.setSellStatus(new SellStatus());
         bikeManagement.addBike(eb);
         eventBus.post(new ConfirmAddEvent());
     }
