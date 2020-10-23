@@ -134,7 +134,7 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
             return new SimpleStringProperty("");
         }
     }
-
+    public Property<String> boughtProperty() {return new SimpleStringProperty(this.ss.getBoughtOn().toString());}
 
 
 

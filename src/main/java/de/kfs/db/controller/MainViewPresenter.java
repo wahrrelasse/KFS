@@ -49,6 +49,8 @@ public class MainViewPresenter extends AbstractPresenter{
     @FXML
     public TableColumn<AbstractBike, String> engineCol;
     @FXML
+    public TableColumn<AbstractBike, String> sellCol;
+    @FXML
     public CheckBox onlyECheck;
     @FXML
     public ChoiceBox<String> searchChoice;
@@ -83,6 +85,7 @@ public class MainViewPresenter extends AbstractPresenter{
         bpbCol.setCellValueFactory(new PropertyValueFactory<>("backPedal"));
         engineCol.setCellValueFactory(new PropertyValueFactory<>("engine"));
 
+        sellCol.setCellValueFactory(new PropertyValueFactory<>("bought"));
 
         searchChoice.getItems().addAll("Nummer", "Schlüsselnummer", "Rahmennummer", "Weitere Informationen");
         searchChoice.setValue("Nummer");
